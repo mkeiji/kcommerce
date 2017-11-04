@@ -46,4 +46,24 @@ def populate_province_table ()
 
 end #end of populate_province_table FUNCTION
 
-################################## EXEC ######################################
+
+# populates the category table
+# @return void
+def populate_category_table ()
+
+
+
+end #--end of populate_category_table FUNCTION
+
+
+
+#################################### EXEC ######################################
+
+# # add default admin
+# create_default_admin_user()
+
+# # populate province table
+# populate_province_table()
+
+# populate category table
+populate_category_table()

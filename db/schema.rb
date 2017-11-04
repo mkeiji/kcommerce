@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103181822) do
+ActiveRecord::Schema.define(version: 20171104174644) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -43,6 +43,26 @@ ActiveRecord::Schema.define(version: 20171103181822) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "cars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "model"
+    t.string "make"
+    t.string "trim"
+    t.decimal "price", precision: 10
+    t.integer "stock_quantity"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_cars_on_category_id"
+  end
+
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "first_name"
     t.string "last_name"
@@ -56,14 +76,40 @@ ActiveRecord::Schema.define(version: 20171103181822) do
     t.index ["province_id"], name: "index_customers_on_province_id"
   end
 
+  create_table "line_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "quantity"
+    t.decimal "price", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "order_id"
+    t.bigint "car_id"
+    t.index ["car_id"], name: "index_line_items_on_car_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "status"
+    t.decimal "pst_rate", precision: 10
+    t.decimal "gst_rate", precision: 10
+    t.decimal "hst_rate", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "customer_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
+
   create_table "provinces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
-    t.float "pst", limit: 24
-    t.float "gst", limit: 24
-    t.float "hst", limit: 24
+    t.decimal "pst", precision: 10
+    t.decimal "gst", precision: 10
+    t.decimal "hst", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cars", "categories"
   add_foreign_key "customers", "provinces"
+  add_foreign_key "line_items", "cars"
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "orders", "customers"
 end
