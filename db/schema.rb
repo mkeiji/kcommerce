@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103005721) do
+ActiveRecord::Schema.define(version: 20171103181822) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -43,6 +43,19 @@ ActiveRecord::Schema.define(version: 20171103005721) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.string "postal_code"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "province_id"
+    t.index ["province_id"], name: "index_customers_on_province_id"
+  end
+
   create_table "provinces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.float "pst", limit: 24
@@ -52,4 +65,5 @@ ActiveRecord::Schema.define(version: 20171103005721) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "customers", "provinces"
 end

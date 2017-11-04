@@ -1,23 +1,25 @@
  Province
-  # db Relation
-  has_many :customers
   # validations
   validates :name, presence: true
+  # db Relation
+  has_many :customers
 
 Customer
+  # validations
+  validates :first_name, :last_name, presence: true
   # db Relation
   belongs_to :province
   has_many :orders
-  # validations
-  validates :first_name, :last_name, presence: true
+
 
 Order
+  # validations
+  validates :status, presence: true
   # db Relation
   has_many :line_items
   has_many :cars, :through => :line_items
   belongs_to :customer
-  # validations
-  validates :status, presence: true
+
 
 LineItem
   # db Relation
@@ -25,15 +27,15 @@ LineItem
   belongs_to :car
 
 Car
+  # validations
+  validates :make, :model, :trim, presence: true
   # db Relation
   has_many :line_items
   has_many :orders, :through => :line_items
   belongs_to :category
-  # validations
-  validates :make, :model, :trim, presence: true
 
 Category
-  # db Relation
-  has_many :cars
   # validations
   validates :name, presence: true
+  # db Relation
+  has_many :cars
