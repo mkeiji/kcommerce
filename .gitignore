@@ -17,3 +17,6 @@
 /yarn-error.log
 
 .byebug_history
+
+# ignore the default uploads folder from carrierwave
+/public/uploads

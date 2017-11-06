@@ -19,6 +19,7 @@ end #--end of create_default_admin_user FUNCTION
 # @return void
 def populate_province_table ()
 
+  # provinces to be inserted
   provinces = [ { name: 'Manitoba', pst: 0.07, gst: 0.05, hst: 0 },
                 { name: 'British Columbia', pst: 0, gst: 0, hst: 0.12 },
                 { name: 'Alberta', pst: 0, gst: 0.05, hst: 0 },
@@ -51,7 +52,20 @@ end #end of populate_province_table FUNCTION
 # @return void
 def populate_category_table ()
 
+  # categories to be inserted
+  categories = [ { name: 'Economic', description: 'Small size car' },
+                 { name: 'Standard', description: 'Medium size car' },
+                 { name: 'Full Size', description: 'Large size car' } ]
 
+  # add categories to table
+  categories.each do |category|
+
+    new_category = Category.new(name: category[:name],
+                                description: category[:description])
+
+    new_category.save
+
+  end
 
 end #--end of populate_category_table FUNCTION
 
