@@ -64,3 +64,6 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'carrierwave', '~> 1.0'
 # mini_magick gem for carrierwave auto resize
 gem 'mini_magick'
+
+# slim-rails gem
+gem 'slim-rails'
