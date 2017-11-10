@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104174644) do
+ActiveRecord::Schema.define(version: 20171110031919) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -41,6 +41,19 @@ ActiveRecord::Schema.define(version: 20171104174644) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "blocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "title"
+    t.text "body"
+    t.string "position"
+    t.boolean "show_title"
+    t.boolean "is_published"
+    t.string "bootstrap_class"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "page_id"
+    t.index ["page_id"], name: "index_blocks_on_page_id"
   end
 
   create_table "cars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -98,6 +111,17 @@ ActiveRecord::Schema.define(version: 20171104174644) do
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
+  create_table "pages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "title"
+    t.text "body"
+    t.boolean "is_published"
+    t.boolean "display_in_menu"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "section_id"
+    t.index ["section_id"], name: "index_pages_on_section_id"
+  end
+
   create_table "provinces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.decimal "pst", precision: 10
@@ -107,9 +131,17 @@ ActiveRecord::Schema.define(version: 20171104174644) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "blocks", "pages"
   add_foreign_key "cars", "categories"
   add_foreign_key "customers", "provinces"
   add_foreign_key "line_items", "cars"
   add_foreign_key "line_items", "orders"
   add_foreign_key "orders", "customers"
+  add_foreign_key "pages", "sections"
 end

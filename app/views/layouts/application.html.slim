@@ -1,0 +1,53 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title KCars
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    /! Bootstrap core CSS
+    link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"
+    / favicon icon
+    link href="http://www.keiji.pcriot.com/site/css/img/K_LOGO.png" rel="icon"
+
+  body
+    / nav bar
+    / nav.navbar.navbar-default.navbar-static-top
+    nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark role="navigation"
+      / brand name: icon
+      img.navbar-brand src="http://www.keiji.pcriot.com/site/css/img/K_LOGO.png"
+      button.navbar-toggler aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarsExampleDefault" data-toggle="collapse" type="button"
+        span.navbar-toggler-icon
+      #navbarsExampleDefault.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          / home link (fixed)
+          li.nav-item.active
+            a.nav-link href=home_path
+              | Home
+              span.sr-only (current)
+
+          / other menu items (check if display_in_menu is true)
+          - Page.all.each do |page|
+            - if page.display_in_menu
+              li.nav-item.active
+                a.nav-link href="#"
+                  = page.title
+                  span.sr-only (current)
+
+          /! Dropdown menu
+          / li.nav-item.dropdown
+          /   a#dropdown01.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="http://example.com"  Dropdown
+          /   .dropdown-menu aria-labelledby="dropdown01"
+          /     a.dropdown-item href="#"  Action
+          /     a.dropdown-item href="#"  Another action
+          /     a.dropdown-item href="#"  Something else here
+
+          /! Search bar
+          / form.form-inline.my-2.my-lg-0
+          /   input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="text" /
+          /   button.btn.btn-outline-success.my-2.my-sm-0 type="submit"
+    = yield
+    /! Site footer
+    .panel-footer id="footer"
+      p © KCar | Privacy | All rights reserved.

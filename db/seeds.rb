@@ -70,6 +70,59 @@ def populate_category_table ()
 end #--end of populate_category_table FUNCTION
 
 
+# populates the sections table
+# @return void
+def populate_sections_table ()
+
+  # sections to be inserted
+  sections = [ { name: 'Company' } ]
+
+  # add sections to table
+  new_section = Section.new(name: sections[:name])
+
+  new_section.save
+
+end #--end of populate_sections_table FUNCTION
+
+
+
+# populates the pages table
+# @return void
+def populate_pages_table ()
+
+  # pages to be inserted
+  pages = [
+    {
+      title: 'About Us',
+      body: '<p>Serving the WINNIPEG area, KCars, located at 888 Main Street in WINNIPEG, MB, is your Premier retailer of Luxury vehicles. Our dedicated sales staff, top-trained technicians and high tech web platform are here to make your auto shopping experience fun, easy and financially advantageous. Please utilize our various online resources and allow our excellent network of people to put you in your ideal vehicle today!</p>',
+      is_published: true,
+      display_in_menu: true,
+      section_id: 1
+    },
+    {
+      title: 'Contact Us',
+      body: '<p>Reach us by phone or email at your best convenience!</p>',
+      is_published: true,
+      display_in_menu: true,
+      section_id: 1
+    }
+  ]
+
+  # add categories to table
+  pages.each do |page|
+
+    new_page = Page.new(title: page[:title],
+                        body: page[:body],
+                        is_published: page[:body],
+                        display_in_menu: page[:display_in_menu],
+                        section_id: page[:section_id])
+
+    new_page.save
+
+  end
+
+end #--end of populate_sections_table FUNCTION
+
 
 #################################### EXEC ######################################
 
@@ -79,5 +132,11 @@ end #--end of populate_category_table FUNCTION
 # # populate province table
 # populate_province_table()
 
-# populate category table
-populate_category_table()
+# # populate category table
+# populate_category_table()
+
+# # populate sections table
+# populate_sections_table ()
+
+# # populate pages table
+# populate_pages_table()

@@ -1,0 +1,23 @@
+/* Move down content because we have a fixed navbar that is 10rem tall */
+body {
+  padding-top: 10rem;
+}
+
+#footer {
+  margin-top: 5rem;
+}
+
+// stylling for the nav menu items
+div {
+  ul {
+    li {
+      // padding between the items
+      padding: 10px;
+
+      // font size for the nav menu
+      a {
+        font-size: 16px;
+      } //a
+    }//li
+  }//ul
+}//div

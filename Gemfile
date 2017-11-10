@@ -60,6 +60,9 @@ gem 'devise'
 # active admin
 gem 'activeadmin', github: 'activeadmin'
 
+# wysiwyg EDITOR for text box in active admin
+gem 'active_admin_editor', github: 'ejholmes/active_admin_editor'
+
 # carrierwave for image upload
 gem 'carrierwave', '~> 1.0'
 # mini_magick gem for carrierwave auto resize
@@ -67,3 +70,12 @@ gem 'mini_magick'
 
 # slim-rails gem
 gem 'slim-rails'
+
+# bootstrap with autoprefixer
+# autoprefixer is optional, but recommended. It automatically
+# adds the proper vendor prefixes to your CSS code when it is compiled.
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+
+# some extra fonts and icons
+gem 'font-awesome-rails'
