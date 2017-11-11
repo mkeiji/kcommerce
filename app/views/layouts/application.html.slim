@@ -22,7 +22,7 @@ html
       #navbarsExampleDefault.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
           / home link (fixed)
-          li.nav-item.active = link_to "Home", root_path
+          li.nav-item.active = link_to "Home", root_path, { :class => "nav-link" }
             / check this to change local vars https://stackoverflow.com/questions/13109252/call-javascript-function-from-haml-link-to
             / https://stackoverflow.com/questions/25033969/get-rails-variables-as-parameter-to-an-onclick-event-function
             / a.nav-link href=root_path
