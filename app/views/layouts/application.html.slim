@@ -27,13 +27,11 @@ html
             / https://stackoverflow.com/questions/25033969/get-rails-variables-as-parameter-to-an-onclick-event-function
             a.nav-link href=root_path
               | Home
-              span.sr-only (current)
 
           / other menu items (check if display_in_menu is true)
           - @page_nav.each do |page|
             - if page.display_in_menu
               li = link_to page.title, page_path(page.id), { :class => "nav-link" }
-                span.sr-only (current)
 
           /! Dropdown menu
           / li.nav-item.dropdown
