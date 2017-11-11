@@ -1,0 +1,67 @@
+.container
+  .fluid_container.one
+    .container
+      .jumbotron
+        h1
+          span.one = @current_page_object.title
+
+      / for contact
+      - if @current_page_object.title == 'Contact'
+        / use 'raw' because in the database the body has <p> tags
+        h2 = raw @current_page_object.body
+        / get all blocks from the contact page
+        - all_contact_blocks = @all_blocks.where("page_id = #{@current_page_object.id}").order(order: :asc)
+        /! Example row of columns
+        .row
+          - all_contact_blocks.each do |block|
+            .col-md-4
+              h2 = raw block.title
+              p = raw block.body
+              / / some view details button
+              / p
+              /   a.btn.btn-secondary href="#" role="button"  View details »
+        hr/
+
+      / for about us
+      - elsif @current_page_object.title == 'About Us'
+        / get all blocks from the contact page
+        - all_about_us_blocks = @all_blocks.where("page_id = #{@current_page_object.id}").order(order: :asc)
+        .container-fluid
+          .row
+            .col-sm-8
+              br/
+              / use 'raw' because in the database the body has <p> tags
+              h4 = raw @current_page_object.body
+              br/
+              h5 = all_about_us_blocks[0].body
+              br/
+        .container-fluid.bg-grey
+          .row
+            .col-sm-4
+              span.glyphicon.glyphicon-globe.logo.slideanim
+            .col-sm-8
+              h2 Our Values
+              br/
+              h4
+                strong = all_about_us_blocks[1].title + ": "
+                h5 = all_about_us_blocks[1].body
+              br/
+              h4
+                strong = all_about_us_blocks[2].title + ": "
+                h5 = all_about_us_blocks[2].body
+
+      - else
+        / use 'raw' because in the database the body has <p> tags
+        h2 = raw @current_page_object.body
+        / get all blocks from the contact page
+        - all_contact_blocks = @all_blocks.where("page_id = #{@current_page_object.id}").order(order: :asc)
+        /! Example row of columns
+        .row
+          - all_contact_blocks.each do |block|
+            .col-md-4
+              h2 = raw block.title
+              p = raw block.body
+              / / some view details button
+              / p
+              /   a.btn.btn-secondary href="#" role="button"  View details »
+        hr/
