@@ -1,6 +1,17 @@
-.home
-  - if home_page
-    h1 This is the Home page
-    h4 pulling something from the DB
-    - if @first_customer != nil
-      h2 = "This is from the database = " + @first_customer.first_name
+.container
+  .fluid_container.one
+    .container
+     .jumbotron
+      h1
+       span.one KCars
+       span.two  &
+       span.three  Christmas Deals
+      h1
+       span.four Your
+       span.six  Dream Car TODAY!
+
+    - if home_page
+      h1 This is the Home page
+      h4 pulling something from the DB
+      - if @first_customer != nil
+        h2 = "This is from the database = " + @first_customer.first_name

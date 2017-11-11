@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  get "pages/:id", to: "pages#show", as: 'pages', id: /\d+/
+  # get "pages/:id", to: "pages#show", as: 'pages', id: /\d+/
+  get ":page_path", to: "pages#show", as: 'pages'
 
   # add the show action to resources
   resources :pages, only: [:show]

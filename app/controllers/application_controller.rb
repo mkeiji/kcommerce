@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   # define get_page_nav function to be accessable
-  before_action :get_page_nav
+  before_action :get_page_nav, :get_all_blocks
 
   protect_from_forgery with: :exception
 
@@ -10,6 +10,14 @@ class ApplicationController < ActionController::Base
   def get_page_nav
 
     @page_nav = Page.where("display_in_menu = true && is_published = true").order(id: :asc)
+
+  end #end get_page_nav FUNCTION
+
+  # creates an instance var to store the blocks from the db
+  # @return void
+  def get_all_blocks
+
+    @all_blocks = Block.where("is_published = true")
 
   end #end get_page_nav FUNCTION
 
