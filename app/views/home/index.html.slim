@@ -1,4 +1,2 @@
-h1 This is the Home page
-h4 pulling something from the DB
-- if @first_customer != nil
-  h2 = "This is from the database = " + @first_customer.first_name
+= render  :partial => 'home',
+          :locals => {  :home_page => true }

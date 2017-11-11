@@ -1,7 +1,7 @@
 class Page < ApplicationRecord
 
   # validations
-  validates :is_published, presence: true
+  validates :page_path, :is_published, presence: true
 
   # db relationships
   belongs_to :section
