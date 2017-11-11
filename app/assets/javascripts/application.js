@@ -15,13 +15,3 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
-
-/********************* EVENT LISTENERS ****************************/
-//loading event listeners for submit button
-function load(){
-	var test = document.getElementById("test");
-	test.addEventListener("click", alarm("worked"));
-}
-
-//adding event listener
-document.addEventListener("DOMContentLoaded", load);
