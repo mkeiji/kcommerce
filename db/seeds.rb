@@ -132,70 +132,48 @@ def populate_cars_table ()
     # cars to be inserted
     cars = [
       {
-        model: 'IS',
-        make: 'Lexus',
-        trim: 'IS 250',
-        price: 12,
+        model: 'F150',
+        make: 'Ford',
+        trim: 'Raptor',
+        price: 112,
         stock_quantity: 1,
-        image: 'lexus_is250_2010.jpeg',
-        category_id: 2,
-        year: 2010,
-        description: 'One owner,50/50 Highway/City, no mechanical issues, excellent vehicle.'
+        image: 'ford_f150_raptor_2018.jpeg',
+        category_id: 3,
+        year: 2018,
+        description: '2017 Ford F-150 XLT 4X4 SuperCrew - 3.5 Liter V6 - Shadow Black Exterior - Black Sport 40/Console/40 - Equipment Group 302A - SYNC - Remote Start - Rear View Camera - Navigation - Twin Panel Moonroof - FX4 Off Road Package - Tailgate Step - Rear Privacy Glass - LED Side Mirror Spot Lights Be at the top of your game with plentiful power behind the wheel of our 2017 Ford F-150 XLT SuperCrew Four Wheel Drive thats raring to go in Shadow Black!'
       },
       {
-        model: 'Impreza',
-        make: 'Subaru',
-        trim: 'WRX',
-        price: 25,
+        model: 'Tundra',
+        make: 'Toyota',
+        trim: 'TRD',
+        price: 95,
         stock_quantity: 1,
-        image: 'subaru_impreza_wrx_2013.png',
-        category_id: 2,
-        year: 2013,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel orci porta non pulvinar. Ipsum nunc aliquet bibendum enim.'
+        image: 'Toyota_Tundra_TRDPro_2017.png',
+        category_id: 3,
+        year: 2017,
+        description: 'With up to 10,000 lbs (4,535 kg) towing capacity* Tundra has proven time and again that it’s always up to the task. And with premium options like the CrewMax Limited & Platinum Models or 1794 Edition, you’ll get where you’re going in style and comfort.'
       },
       {
-        model: 'Lancer',
-        make: 'Mistsubishi',
-        trim: 'Evolution',
+        model: '3',
+        make: 'Mazda',
+        trim: 'GX',
         price: 32,
         stock_quantity: 1,
-        image: 'mitsubishi_lancer_evolution_2013.png',
-        category_id: 2,
-        year: 2013,
-        description: 'Eget sit amet tellus cras adipiscing enim eu turpis egestas. Eget egestas purus viverra accumsan in nisl nisi scelerisque eu.'
-      },
-      {
-        model: '328',
-        make: 'BMW',
-        trim: 'i',
-        price: 35,
-        stock_quantity: 1,
-        image: 'bmw_328i_2014.png',
-        category_id: 2,
-        year: 2014,
-        description: 'Tristique senectus et netus et malesuada fames ac turpis egestas. Scelerisque purus semper eget duis. Enim blandit volutpat maecenas volutpat.'
-      },
-      {
-        model: 'C',
-        make: 'Mercedez',
-        trim: 'c250',
-        price: 36,
-        stock_quantity: 1,
-        image: 'mercedez_c250_2013.png',
-        category_id: 2,
-        year: 2013,
-        description: 'Posuere ac ut consequat semper viverra nam libero justo laoreet. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Blandit libero volutpat sed cras ornare arcu dui.'
-      },
-      {
-        model: 'RX-8',
-        make: 'Mazda',
-        trim: 'RX',
-        price: 28,
-        stock_quantity: 1,
-        image: 'mazda_rx8_2007.png',
-        category_id: 2,
+        image: 'mazda_3_2017.png',
+        category_id: 1,
         year: 2017,
-        description: 'Quis commodo odio aenean sed adipiscing diam donec. Massa massa ultricies mi quis. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Eros donec ac odio tempor orci dapibus.'
+        description: 'In the 2017 MAZDA3, a sleek exterior is just the start of an exhilarating driving experience. Crafted by engineers who are passionate about how it feels to drive a car that’s beautiful, confident and cutting-edge, every detail is shaped to ensure unfailing quality and exceptional driving exhilaration. The 2017 MAZDA3 proves that one car can fulfill everything you love about driving.'
+      },
+      {
+        model: 'Fit',
+        make: 'Honda',
+        trim: 'EX',
+        price: 15,
+        stock_quantity: 1,
+        image: 'Honda_Fit_2018.png',
+        category_id: 1,
+        year: 2018,
+        description: 'An amazingly flexible interior, an efficient powertrain, and agreeable pricing make the Fit an easy recommendation. The 1.5-liter inline-four makes 130 hp when equipped with the standard six-speed manual but 128 hp when paired to the optional continuously variable automatic transmission. Automated emergency braking, lane-keeping assist, and adaptive cruise control are optional.'
       }
     ]
   
@@ -238,5 +216,5 @@ def populate_cars_table ()
 # # populate pages table
 # populate_pages_table()
 
-# # populate cars table
-# populate_cars_table()
+# populate cars table
+populate_cars_table()

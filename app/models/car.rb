@@ -11,10 +11,4 @@ class Car < ApplicationRecord
   # mounting image uploader from carrierwave
   mount_uploader :image, ImageUploader
 
-  def get_image_name (image_full_path)
-
-    image_full_path.tr("/app/app/assets/images/", "")
-
-  end
-
 end

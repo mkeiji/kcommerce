@@ -77,6 +77,9 @@ GEM
       execjs (~> 2.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     builder (3.2.3)
@@ -287,6 +290,7 @@ DEPENDENCIES
   active_admin_editor!
   activeadmin!
   autoprefixer-rails
+  bootstrap-kaminari-views
   bootstrap-sass (~> 3.2.0)
   byebug
   capybara (~> 2.13)
@@ -295,6 +299,7 @@ DEPENDENCIES
   devise
   font-awesome-rails
   jbuilder (~> 2.5)
+  kaminari
   listen (>= 3.0.5, < 3.2)
   mini_magick
   mysql2 (>= 0.3.18, < 0.5)

@@ -6,6 +6,39 @@ git_source(:github) do |repo_name|
 end
 
 
+#*************** PROJECT SPECIFIC GEMS ***************
+# device (authentication gem)
+gem 'devise'
+
+# active admin
+gem 'activeadmin', github: 'activeadmin'
+
+# wysiwyg EDITOR for text box in active admin
+gem 'active_admin_editor', github: 'ejholmes/active_admin_editor'
+
+# carrierwave for image upload
+gem 'carrierwave', '~> 1.0'
+# mini_magick gem for carrierwave auto resize
+gem 'mini_magick'
+
+# slim-rails gem
+gem 'slim-rails'
+
+# bootstrap with autoprefixer
+# autoprefixer is optional, but recommended. It automatically
+# adds the proper vendor prefixes to your CSS code when it is compiled.
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+
+# some extra fonts and icons
+gem 'font-awesome-rails'
+
+# pagination gems
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
+
+
+#*************** PROJECT DEFAULT GEMS ***************
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use mysql as the database for Active Record
@@ -53,29 +86,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-#*************** PROJECT SPECIFIC GEMS ***************
-# device (authentication gem)
-gem 'devise'
 
-# active admin
-gem 'activeadmin', github: 'activeadmin'
-
-# wysiwyg EDITOR for text box in active admin
-gem 'active_admin_editor', github: 'ejholmes/active_admin_editor'
-
-# carrierwave for image upload
-gem 'carrierwave', '~> 1.0'
-# mini_magick gem for carrierwave auto resize
-gem 'mini_magick'
-
-# slim-rails gem
-gem 'slim-rails'
-
-# bootstrap with autoprefixer
-# autoprefixer is optional, but recommended. It automatically
-# adds the proper vendor prefixes to your CSS code when it is compiled.
-gem 'bootstrap-sass', '~> 3.2.0'
-gem 'autoprefixer-rails'
-
-# some extra fonts and icons
-gem 'font-awesome-rails'
