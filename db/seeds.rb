@@ -132,6 +132,72 @@ def populate_cars_table ()
     # cars to be inserted
     cars = [
       {
+        model: 'IS',
+        make: 'Lexus',
+        trim: 'IS 250',
+        price: 12,
+        stock_quantity: 1,
+        image: 'lexus_is250_2010.jpeg',
+        category_id: 2,
+        year: 2010,
+        description: 'The 2010 Lexus IS 250 is a luxury sport-looking sedan. Its tidy dimensions and slinky wedge profile indicate a sporty, athletic car -- ditto on its handsome wheels, available manual transmission and standard V6 engine.'
+      },
+      {
+        model: 'Impreza',
+        make: 'Subaru',
+        trim: 'WRX',
+        price: 25,
+        stock_quantity: 1,
+        image: 'subaru_impreza_wrx_2013.png',
+        category_id: 2,
+        year: 2013,
+        description: 'Available styles include 4dr Sedan AWD (2.5L 4cyl Turbo 5M), 4dr Hatchback AWD (2.5L 4cyl Turbo 5M), and STI 4dr Hatchback AWD (2.5L 4cyl Turbo 6M). Impreza WRX models are available with a 2.5 l-liter gas engine, with output up to 305 hp, depending on engine type. The 2013 Impreza WRX comes with all wheel drive.'
+      },
+      {
+        model: 'Lancer',
+        make: 'Mistsubishi',
+        trim: 'Evolution',
+        price: 32,
+        stock_quantity: 1,
+        image: 'mitsubishi_lancer_evolution_2013.png',
+        category_id: 2,
+        year: 2013,
+        description: 'Every 2013 Lancer Evolution is powered by a turbocharged four-cylinder engine that pumps out 291 horsepower and 300 pound-feet of torque.'
+      },
+      {
+        model: '328',
+        make: 'BMW',
+        trim: 'i',
+        price: 35,
+        stock_quantity: 1,
+        image: 'bmw_328i_2014.png',
+        category_id: 2,
+        year: 2014,
+        description: 'The 2014 BMW 3 Series has terrific power and a smooth ride with nimble handling. Inside, you’ll find more user-friendly tech and rear-seat room than most rivals.'
+      },
+      {
+        model: 'C',
+        make: 'Mercedes',
+        trim: 'c250',
+        price: 36,
+        stock_quantity: 1,
+        image: 'mercedez_c250_2013.png',
+        category_id: 2,
+        year: 2013,
+        description: 'The 2013 Mercedes-Benz C-Class is available in sedan and coupe body styles, both of which are available in C250, C350 and C63 AMG trim levels. All-wheel-drive versions are also available in the form of the C300 4Matic sedan and C350 4Matic coupe.'
+      },
+      {
+        model: 'RX-8',
+        make: 'Mazda',
+        trim: 'RX',
+        price: 28,
+        stock_quantity: 1,
+        image: 'mazda_rx8_2007.png',
+        category_id: 2,
+        year: 2017,
+        description: 'In this new RX-8, it embodies an unusual concept: the four-seat sports car. Yeah, we know that Nissan once called the Maxima a four-door sports car, but lets get real here. This RX-8 actually runs and steers and feels like a convincing spiritual successor to the quick-witted but slow-selling RX-7.'
+      },
+      {
         model: 'F150',
         make: 'Ford',
         trim: 'Raptor',

@@ -23,6 +23,7 @@ ActiveAdmin.register Car do
 
     f.inputs "Car" do
 
+      f.input :category_id, :as => :select, :collection => Category.all
       f.input :model
       f.input :make
       f.input :trim
