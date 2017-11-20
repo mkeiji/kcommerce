@@ -176,7 +176,7 @@ def populate_cars_table ()
         description: 'Tristique senectus et netus et malesuada fames ac turpis egestas. Scelerisque purus semper eget duis. Enim blandit volutpat maecenas volutpat.'
       },
       {
-        model: 'c',
+        model: 'C',
         make: 'Mercedez',
         trim: 'c250',
         price: 36,
