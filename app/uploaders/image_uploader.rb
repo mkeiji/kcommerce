@@ -13,7 +13,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   def store_dir
     # images folder in assets
     images_folder = Rails.root / 'app' / 'assets' / 'images'
-    "#{images_folder}/car_id_#{model.id}"
+    "#{images_folder}"
+
+    # to create a folder for each car
+    # "#{images_folder}/car_id_#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -25,6 +28,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
+  process resize_to_fit: [300, 300]
+  # to use a custom function "scale"
   # process scale: [200, 300]
   #
   # def scale(width, height)
@@ -32,9 +37,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :thumb do
-    process resize_to_fit: [200, 200]
-  end
+  # version :thumb do
+  #   process resize_to_fit: [200, 200]
+  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

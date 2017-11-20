@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    # get first customer
-    @first_customer = Customer.first
+    # get all products
+    @all_cars = Car.all
   end
 end

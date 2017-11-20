@@ -4,7 +4,7 @@
       .jumbotron
         h1
           span.one = @current_page_object.title
-
+ 
       / for contact
       - if @current_page_object.title == 'Contact'
         / use 'raw' because in the database the body has <p> tags
@@ -31,24 +31,27 @@
             .col-sm-8
               br/
               / use 'raw' because in the database the body has <p> tags
-              h4 = raw @current_page_object.body
+              h5 = raw @current_page_object.body
               br/
-              h5 = all_about_us_blocks[0].body
+              h5 = raw all_about_us_blocks[0].body
               br/
+            .col-sm-4
+              / put image here
         .container-fluid.bg-grey
           .row
             .col-sm-4
+              / put image here
               span.glyphicon.glyphicon-globe.logo.slideanim
             .col-sm-8
               h2 Our Values
               br/
               h4
                 strong = all_about_us_blocks[1].title + ": "
-                h5 = all_about_us_blocks[1].body
+                h5 = raw all_about_us_blocks[1].body
               br/
               h4
                 strong = all_about_us_blocks[2].title + ": "
-                h5 = all_about_us_blocks[2].body
+                h5 = raw all_about_us_blocks[2].body
 
       - else
         / use 'raw' because in the database the body has <p> tags

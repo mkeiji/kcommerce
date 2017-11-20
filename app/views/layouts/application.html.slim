@@ -17,9 +17,8 @@ html
     nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark role="navigation"
       / brand name: icon
       img.navbar-brand src="http://www.keiji.pcriot.com/site/css/img/K_LOGO.png"
-      button.navbar-toggler aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarsExampleDefault" data-toggle="collapse" type="button"
-        span.navbar-toggler-icon
-      #navbarsExampleDefault.collapse.navbar-collapse
+
+      .collapse.navbar-collapse
         ul.navbar-nav.mr-auto
           / home link (fixed)
           li.nav-item.active id='test' = link_to "Home", root_path, { :class => "nav-link" }
@@ -29,9 +28,19 @@ html
             - if page.display_in_menu
               / / to get path with id
               / li.nav-item.active = link_to page.title, page_path(page.id), { :class => "nav-link" }
-              / to get path with "page_path" column
-              li.nav-item.active = link_to page.title, page.page_path, { :class => "nav-link" }
+              / / to get path with "page_path" column name (eg: .../about)
+              / li.nav-item.active = link_to page.title, page.page_path, { :class => "nav-link" }
+              / / to get path with page_path controler name + "page_path" column name (eg: ...pages/about)
+              li.nav-item.active = link_to page.title, page_path(page.page_path), { :class => "nav-link" }
 
+        /! search bar
+        / check this: http://www.rymcmahon.com/articles/2
+        / and this: http://www.korenlc.com/creating-a-simple-search-in-rails-4/
+        .form-inline.my-2.my-lg-0 id='searchbar'
+          / = form_tag(cars_path, :method => "get", id: "search-form") do
+          = form_tag(:method => "get", id: "search-form") do
+            = text_field_tag :search, params[:search], placeholder: "Search Cars"
+            = submit_tag "Search", :name => nil
 
           /! Dropdown menu
           / li.nav-item.dropdown
@@ -41,10 +50,6 @@ html
           /     a.dropdown-item href="#"  Another action
           /     a.dropdown-item href="#"  Something else here
 
-          /! Search bar
-          / form.form-inline.my-2.my-lg-0
-          /   input.form-control.mr-sm-2 aria-label="Search" placeholder="Search" type="text" /
-          /   button.btn.btn-outline-success.my-2.my-sm-0 type="submit"
     = yield
     /! Site footer
     .panel-footer id="footer"

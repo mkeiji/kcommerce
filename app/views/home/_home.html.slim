@@ -10,8 +10,60 @@
        span.four Your
        span.six  Dream Car TODAY!
 
-    - if home_page
-      h1 This is the Home page
-      h4 pulling something from the DB
-      - if @first_customer != nil
-        h2 = "This is from the database = " + @first_customer.first_name
+    / getting image file name (trim the full path)
+    - image_file_name = extract_car_image_filename(@all_cars.first)
+
+    / creating row to store products
+    .row.text-center
+      / creating product card -- (put loop here)
+      .col-lg-3.col-md-6.mb-4
+        .card
+          img.card-img-top = image_tag(image_file_name)
+          .card-body
+            h4.card-title = @all_cars.first.make + " " + @all_cars.first.model
+            p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
+          .card-footer
+            a.btn.btn-primary href="#"  Find Out More!
+
+    / /! Page Features -- LOOP HERE
+    / .row.text-center
+    /   .col-lg-3.col-md-6.mb-4
+    /     .card
+    /       img.card-img-top alt="" src="http://placehold.it/500x325" /
+    /       .card-body
+    /         h4.card-title Card title
+    /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
+    /       .card-footer
+    /         a.btn.btn-primary href="#"  Find Out More!
+    /   .col-lg-3.col-md-6.mb-4
+    /     .card
+    /       img.card-img-top alt="" src="http://placehold.it/500x325" /
+    /       .card-body
+    /         h4.card-title Card title
+    /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.
+    /       .card-footer
+    /         a.btn.btn-primary href="#"  Find Out More!
+    /   .col-lg-3.col-md-6.mb-4
+    /     .card
+    /       img.card-img-top alt="" src="http://placehold.it/500x325" /
+    /       .card-body
+    /         h4.card-title Card title
+    /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
+    /       .card-footer
+    /         a.btn.btn-primary href="#"  Find Out More!
+    /   .col-lg-3.col-md-6.mb-4
+    /     .card
+    /       img.card-img-top alt="" src="http://placehold.it/500x325" /
+    /       .card-body
+    /         h4.card-title Card title
+    /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.
+    /       .card-footer
+    /         a.btn.btn-primary href="#"  Find Out More!
+    /   .col-lg-3.col-md-6.mb-4
+    /     .card
+    /       img.card-img-top alt="" src="http://placehold.it/500x325" /
+    /       .card-body
+    /         h4.card-title Card title
+    /         p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.
+    /       .card-footer
+    /         a.btn.btn-primary href="#"  Find Out More!
