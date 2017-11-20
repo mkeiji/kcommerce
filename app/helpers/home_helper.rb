@@ -19,9 +19,9 @@ module HomeHelper
     # @return (String) limited_string
     def limit_text_length (string_to_put_limitation)
 
-        if string_to_put_limitation.length > 50
+        if string_to_put_limitation.length > 80
            
-            limited_string = string_to_put_limitation[0..50].gsub(/\s\w+\s*$/,'...')
+            limited_string = string_to_put_limitation[0..80].gsub(/\s\w+\s*$/,'...')
 
             return limited_string
         
