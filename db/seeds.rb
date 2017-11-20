@@ -132,13 +132,24 @@ def populate_cars_table ()
     # cars to be inserted
     cars = [
       {
+        model: 'IS',
+        make: 'Lexus',
+        trim: 'IS 250',
+        price: 12,
+        stock_quantity: 1,
+        image: 'lexus_is250_2010.jpeg',
+        category_id: 2,
+        year: 2010,
+        description: 'One owner,50/50 Highway/City, no mechanical issues, excellent vehicle.'
+      },
+      {
         model: 'Impreza',
         make: 'Subaru',
         trim: 'WRX',
         price: 25,
         stock_quantity: 1,
         image: 'subaru_impreza_wrx_2013.png',
-        category_id: 1,
+        category_id: 2,
         year: 2013,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel orci porta non pulvinar. Ipsum nunc aliquet bibendum enim.'
       },
@@ -149,7 +160,7 @@ def populate_cars_table ()
         price: 32,
         stock_quantity: 1,
         image: 'mitsubishi_lancer_evolution_2013.png',
-        category_id: 1,
+        category_id: 2,
         year: 2013,
         description: 'Eget sit amet tellus cras adipiscing enim eu turpis egestas. Eget egestas purus viverra accumsan in nisl nisi scelerisque eu.'
       },
@@ -160,7 +171,7 @@ def populate_cars_table ()
         price: 35,
         stock_quantity: 1,
         image: 'bmw_328i_2014.png',
-        category_id: 1,
+        category_id: 2,
         year: 2014,
         description: 'Tristique senectus et netus et malesuada fames ac turpis egestas. Scelerisque purus semper eget duis. Enim blandit volutpat maecenas volutpat.'
       },
@@ -171,7 +182,7 @@ def populate_cars_table ()
         price: 36,
         stock_quantity: 1,
         image: 'mercedez_c250_2013.png',
-        category_id: 1,
+        category_id: 2,
         year: 2013,
         description: 'Posuere ac ut consequat semper viverra nam libero justo laoreet. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Blandit libero volutpat sed cras ornare arcu dui.'
       },
@@ -182,7 +193,7 @@ def populate_cars_table ()
         price: 28,
         stock_quantity: 1,
         image: 'mazda_rx8_2007.png',
-        category_id: 1,
+        category_id: 2,
         year: 2017,
         description: 'Quis commodo odio aenean sed adipiscing diam donec. Massa massa ultricies mi quis. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Eros donec ac odio tempor orci dapibus.'
       }

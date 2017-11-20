@@ -1,10 +1,21 @@
+/* Variables
+-----------------------------*/
+$body_padding: 10rem;
+$footer_padding: 5rem;
+$item_padding: 10px;
+$nav_font_size: 16px;
+
+
+
+/* Styles
+-----------------------------*/
 /* Move down content because we have a fixed navbar that is 10rem tall */
 body {
-  padding-top: 10rem;
+  padding-top: $body_padding;
 }
 
 #footer {
-  margin-top: 5rem;
+  margin-top: $footer_padding;
 }
 
 // stylling for the nav menu items
@@ -12,11 +23,11 @@ div {
   ul {
     li {
       // padding between the items
-      padding: 10px;
+      padding: $item_padding;
 
       // font size for the nav menu
       a {
-        font-size: 16px;
+        font-size: $nav_font_size;
       } //a
     }//li
   }//ul
