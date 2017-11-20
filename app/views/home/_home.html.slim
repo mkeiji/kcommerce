@@ -10,18 +10,19 @@
        span.four Your
        span.six  Dream Car TODAY!
 
-    / getting image file name (trim the full path)
-    - image_file_name = extract_car_image_filename(@all_cars.first)
-
     / creating row to store products
     .row.text-center
+      / loop through all the cars to be displayed
+
+      / getting image file name (trim the full path)
+      - image_file_name = extract_car_image_filename(@all_cars.first)
       / creating product card -- (put loop here)
       .col-lg-3.col-md-6.mb-4
         .card
           img.card-img-top = image_tag(image_file_name)
           .card-body
-            h4.card-title = @all_cars.first.make + " " + @all_cars.first.model
-            p.card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.
+            h4.card-title = @all_cars.first.make + " " + @all_cars.first.model + " " + @all_cars.first.year.to_s
+            p.card-text = limit_text_length(@all_cars.first.description)
           .card-footer
             a.btn.btn-primary href="#"  Find Out More!
 

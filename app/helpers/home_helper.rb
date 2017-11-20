@@ -13,4 +13,25 @@ module HomeHelper
         
     end#--end of extract_car_image_filename FUNCTION
 
+
+    # Limits the length of the string
+    # @param (String) string_to_put_limitation
+    # @return (String) limited_string
+    def limit_text_length (string_to_put_limitation)
+
+        if string_to_put_limitation.length > 100
+           
+            limited_string = string_to_put_limitation[0..100].gsub(/\s\w+\s*$/,'...')
+
+            return limited_string
+        
+        else
+
+            return string_to_put_limitation
+
+        end#string size check
+
+    end#--end of limit_text_length FUNCTION
+
+
 end#--end of HomeHelper MODULE
