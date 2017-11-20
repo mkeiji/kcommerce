@@ -124,6 +124,48 @@ def populate_pages_table ()
 end #--end of populate_sections_table FUNCTION
 
 
+
+# populates the cars table
+# @return void
+def populate_cars_table ()
+  
+    # cars to be inserted
+    cars = [
+      {
+        model: 'Impreza',
+        make: 'Subaru',
+        trim: 'WRX',
+        price: 25,
+        stock_quantity: 1,
+        image: '/app/app/assets/images/subaru_impreza_wrx_2013.png',
+        category_id: 1,
+        year: 2013,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel orci porta non pulvinar. Ipsum nunc aliquet bibendum enim.'
+      }
+    ]
+  
+    # add categories to table
+    cars.each do |car|
+  
+      new_car = Car.new(  
+        model: car[:model],
+        make: car[:make],
+        trim: car[:trim],
+        price: car[:price],
+        stock_quantity: car[:stock_quantity],
+        image: car[:image],
+        category_id: car[:category_id],
+        year: car[:year],
+        description: car[:description]
+      )
+  
+      new_car.save
+  
+    end#loop
+  
+  end #--end of populate_sections_table FUNCTION
+
+
 #################################### EXEC ######################################
 
 # # add default admin
