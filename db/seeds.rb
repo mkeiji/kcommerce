@@ -141,6 +141,50 @@ def populate_cars_table ()
         category_id: 1,
         year: 2013,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel orci porta non pulvinar. Ipsum nunc aliquet bibendum enim.'
+      },
+      {
+        model: 'Lancer',
+        make: 'Mistsubishi',
+        trim: 'Evolution',
+        price: 32,
+        stock_quantity: 1,
+        image: '/app/app/assets/images/mitsubishi_lancer_evolution_2013.png',
+        category_id: 1,
+        year: 2013,
+        description: 'Eget sit amet tellus cras adipiscing enim eu turpis egestas. Eget egestas purus viverra accumsan in nisl nisi scelerisque eu.'
+      },
+      {
+        model: '328',
+        make: 'BMW',
+        trim: 'i',
+        price: 35,
+        stock_quantity: 1,
+        image: '/app/app/assets/images/bmw_328i_2014.png',
+        category_id: 1,
+        year: 2014,
+        description: 'Tristique senectus et netus et malesuada fames ac turpis egestas. Scelerisque purus semper eget duis. Enim blandit volutpat maecenas volutpat.'
+      },
+      {
+        model: 'c',
+        make: 'Mercedez',
+        trim: 'c250',
+        price: 36,
+        stock_quantity: 1,
+        image: '/app/app/assets/images/mercedez_c250_2013.png',
+        category_id: 1,
+        year: 2013,
+        description: 'Posuere ac ut consequat semper viverra nam libero justo laoreet. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Blandit libero volutpat sed cras ornare arcu dui.'
+      },
+      {
+        model: 'RX-8',
+        make: 'Mazda',
+        trim: 'RX',
+        price: 28,
+        stock_quantity: 1,
+        image: '/app/app/assets/images/mazda_rx8_2007.png',
+        category_id: 1,
+        year: 2017,
+        description: 'Quis commodo odio aenean sed adipiscing diam donec. Massa massa ultricies mi quis. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Eros donec ac odio tempor orci dapibus.'
       }
     ]
   
@@ -182,3 +226,6 @@ def populate_cars_table ()
 
 # # populate pages table
 # populate_pages_table()
+
+# # populate cars table
+populate_cars_table()
