@@ -14,11 +14,14 @@ class PagesController < ApplicationController
     # find object (based on the page_path)
     @current_page_object = Page.find_by page_path: @page_path
 
-    # For car related pages
-    @car_id = params[:id].to_s
+    # check if there is a params id (for details page)
+    if params[:id]
+      # For car related pages
+      @car_id = params[:id].to_s
 
-    # find car (based on car id)
-    @current_car_object = Car.find(@car_id)
+      # find car (based on car id)
+      @current_car_object = Car.find(@car_id)
+    end
 
   end
 end
