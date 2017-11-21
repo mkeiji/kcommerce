@@ -17,7 +17,7 @@
       - @cars_to_be_displayed.each do |car|
         / getting image file name (trim the full path)
         - image_file_name = extract_car_image_filename(car)
-        / creating product card -- (put loop here)
+        / creating product card -- https://mdbootstrap.com/components/cards/#cascading-cards
         .col-lg-3.col-md-6.mb-4
           .card
             img = image_tag(image_file_name)

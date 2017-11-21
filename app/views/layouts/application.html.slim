@@ -21,7 +21,7 @@ html
       .collapse.navbar-collapse
         ul.navbar-nav.mr-auto
           / home link (fixed)
-          li.nav-item.active id='test' = link_to "Home", root_path, { :class => "nav-link" }
+          li.nav-item.active id='home' = link_to "Home", root_path, { :class => "nav-link" }
 
           / other menu items (check if display_in_menu is true)
           - @page_nav.each do |page|
@@ -33,22 +33,40 @@ html
               / / to get path with page_path controler name + "page_path" column name (eg: ...pages/about)
               li.nav-item.active = link_to page.title, page_path(page.page_path), { :class => "nav-link" }
 
-        /! search bar
-        / check this: http://www.rymcmahon.com/articles/2
-        / and this: http://www.korenlc.com/creating-a-simple-search-in-rails-4/
-        .form-inline.my-2.my-lg-0 id='searchbar'
-          / = form_tag(cars_path, :method => "get", id: "search-form") do
-          = form_tag(:method => "get", id: "search-form") do
-            = text_field_tag :search, params[:search], placeholder: "Search Cars"
-            = submit_tag "Search", :name => nil
+        / sign in options (fixed)
+        ul.nav.navbar-nav 
+          li
+            p.navbar-btn 
+              a.btn.btn-default href="#" Login
+          li
+            p.navbar-btn 
+              a.btn.btn-default href="#" Sign In
 
-          /! Dropdown menu
-          / li.nav-item.dropdown
-          /   a#dropdown01.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="http://example.com"  Dropdown
-          /   .dropdown-menu aria-labelledby="dropdown01"
-          /     a.dropdown-item href="#"  Action
-          /     a.dropdown-item href="#"  Another action
-          /     a.dropdown-item href="#"  Something else here
+        / / tried using glyphicon
+        / ul.nav.navbar-nav.navbar-right
+        /   li.glyphicon.glyphicon-log-in 
+        /     span Login
+        /   li.glyphicon.glyphicon-user 
+        /     span Sign In
+
+    / second nav bar for the search function
+    nav.navbar.navbar-toggleable-sm.bg-inverse.navbar-inverse.fixed-top id='nav2'
+      .container-fluid id='searchTool' 
+        .row-fluid 
+          /! select menu for search
+          .col-sm-4
+            select.form-control
+              option value="all"  All
+              option value="category"  By category
+
+          /! search bar
+          / check this: http://www.rymcmahon.com/articles/2
+          / and this: http://www.korenlc.com/creating-a-simple-search-in-rails-4/
+          .form-inline.my-2.my-lg-0 id='searchbar'
+            / = form_tag(cars_path, :method => "get", id: "search-form") do
+            = form_tag(:method => "get", id: "search-form") do
+              = text_field_tag :search, params[:search], placeholder: "Search Cars"
+              = submit_tag "Search", :name => nil
 
     = yield
     /! Site footer

@@ -1,6 +1,6 @@
 /* Variables
 -----------------------------*/
-$body_padding: 10rem;
+$body_padding: 16rem;
 $footer_padding: 5rem;
 $item_padding: 10px;
 $nav_font_size: 16px;
@@ -9,6 +9,11 @@ $nav_font_size: 16px;
 
 /* Styles
 -----------------------------*/
+// Move down the second navbar
+#nav2 {
+  margin-top: 8rem;
+}
+
 /* Move down content because we have a fixed navbar that is 10rem tall */
 body {
   padding-top: $body_padding;
