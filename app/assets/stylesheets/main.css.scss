@@ -12,7 +12,14 @@ $nav_font_size: 16px;
 // Move down the second navbar
 #nav2 {
   margin-top: 8rem;
+
+  // select tag for search bar
+  select {
+    margin-right: 10px;
+  }
+
 }
+
 
 /* Move down content because we have a fixed navbar that is 10rem tall */
 body {

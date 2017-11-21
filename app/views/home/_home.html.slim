@@ -11,21 +11,26 @@
     /    span.four Your
     /    span.six  Dream Car TODAY!
 
-    / creating row to store products
-    .row.text-center
-      / loop through all the cars to be displayed
-      - @cars_to_be_displayed.each do |car|
-        / getting image file name (trim the full path)
-        - image_file_name = extract_car_image_filename(car)
-        / creating product card -- https://mdbootstrap.com/components/cards/#cascading-cards
-        .col-lg-3.col-md-6.mb-4
-          .card
-            img = image_tag(image_file_name)
-            .card-body
-              h4.card-title = car.make + " " + car.model + " " + car.year.to_s
-              p.card-text = limit_text_length(car.description)
-            .card-footer
-              a = link_to 'Find Out More!', cars_path(car.id), { :class => 'btn btn-primary'}
+    / check if there was a search
+    - if @cars_to_be_displayed.size == 0
+      h1 = "Unfortunately no match were found for '#{@search_param}' =("
+
+    - else
+      / creating row to store products
+      .row.text-center
+        / loop through all the cars to be displayed
+        - @cars_to_be_displayed.each do |car|
+          / getting image file name (trim the full path)
+          - image_file_name = extract_car_image_filename(car)
+          / creating product card -- https://mdbootstrap.com/components/cards/#cascading-cards
+          .col-lg-3.col-md-6.mb-4
+            .card
+              img = image_tag(image_file_name)
+              .card-body
+                h4.card-title = car.make + " " + car.model + " " + car.year.to_s
+                p.card-text = limit_text_length(car.description)
+              .card-footer
+                a = link_to 'Find Out More!', cars_path(car.id), { :class => 'btn btn-primary'}
 
     / adding pagination wiz kaminari and styling with another gem
     = paginate @cars_to_be_displayed, :theme => 'twitter-bootstrap-3'
