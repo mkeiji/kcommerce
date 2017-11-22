@@ -97,6 +97,7 @@ def populate_pages_table ()
       body: '<p>Serving the WINNIPEG area, KCars, located at 888 Main Street in WINNIPEG, MB, is your Premier retailer of Luxury vehicles. Our dedicated sales staff, top-trained technicians and high tech web platform are here to make your auto shopping experience fun, easy and financially advantageous. Please utilize our various online resources and allow our excellent network of people to put you in your ideal vehicle today!</p>',
       is_published: true,
       display_in_menu: true,
+      page_path: 'about',
       section_id: 1
     },
     {
@@ -104,7 +105,8 @@ def populate_pages_table ()
       body: '<p>Reach us by phone or email at your best convenience!</p>',
       is_published: true,
       display_in_menu: true,
-      section_id: 1
+      page_path: 'contact',
+      section_id: Section.find(1)
     }
   ]
 
@@ -115,6 +117,7 @@ def populate_pages_table ()
                         body: page[:body],
                         is_published: page[:body],
                         display_in_menu: page[:display_in_menu],
+                        page_path: page[:page_path],
                         section_id: page[:section_id])
 
     new_page.save
@@ -124,11 +127,97 @@ def populate_pages_table ()
 end #--end of populate_sections_table FUNCTION
 
 
+# populates the blocks table
+# @return void
+def populate_blocks_table ()
+
+  # pages to be inserted
+  blocks = [
+    {
+      title: 'By Email',
+      body: '<p>kcars@email.com</p>',
+      position: 'block',
+      show_title: true,
+      is_published: true,
+      bootstrap_class: '',
+      page: Page.find(2),
+      order: 1
+    },
+    {
+      title: 'By Phone',
+      body: '<p>phone: +1(204)777-7777</p>',
+      position: 'block',
+      show_title: true,
+      is_published: true,
+      bootstrap_class: '',
+      page: Page.find(2),
+      order: 2
+    },
+    {
+      title: 'In Person',
+      body: '<p>123 Main Street<br>R3E 2C1<br>Winnipeg - MB<br>Canada<br></p>',
+      position: 'block',
+      show_title: true,
+      is_published: true,
+      bootstrap_class: '',
+      page: Page.find(2),
+      order: 3
+    },
+    {
+      title: 'about us 1',
+      body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>',
+      position: 'block',
+      show_title: false,
+      is_published: true,
+      bootstrap_class: '',
+      page: Page.find(1),
+      order: 1
+    },
+    {
+      title: 'MISSION',
+      body: '<p>Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br></p>',
+      position: 'block',
+      show_title: true,
+      is_published: true,
+      bootstrap_class: '',
+      page: Page.find(1),
+      order: 2
+    },
+    {
+      title: 'VISION',
+      body: '<p>Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br></p>',
+      position: 'block',
+      show_title: true,
+      is_published: true,
+      bootstrap_class: '',
+      page: Page.find(1),
+      order: 3
+    }
+  ]
+
+  # add categories to table
+  blocks.each do |block|
+
+    new_block = Block.new(title: block[:title],
+                        body: block[:body],
+                        position: block[:position],
+                        show_title: block[:show_title],
+                        is_published: block[:is_published],
+                        bootstrap_class: block[:bootstrap_class],
+                        page: block[:page],
+                        order: block[:order])
+
+    new_block.save
+
+  end
+
+end #--end of populate_blocks_table FUNCTION
+
 
 # populates the cars table
 # @return void
 def populate_cars_table ()
-  
+
     # cars to be inserted
     cars = [
       {
@@ -242,11 +331,11 @@ def populate_cars_table ()
         description: 'An amazingly flexible interior, an efficient powertrain, and agreeable pricing make the Fit an easy recommendation. The 1.5-liter inline-four makes 130 hp when equipped with the standard six-speed manual but 128 hp when paired to the optional continuously variable automatic transmission. Automated emergency braking, lane-keeping assist, and adaptive cruise control are optional.'
       }
     ]
-  
+
     # add categories to table
     cars.each do |car|
-  
-      new_car = Car.new(  
+
+      new_car = Car.new(
         model: car[:model],
         make: car[:make],
         trim: car[:trim],
@@ -257,11 +346,11 @@ def populate_cars_table ()
         year: car[:year],
         description: car[:description]
       )
-  
+
       new_car.save
-  
+
     end#loop
-  
+
   end #--end of populate_sections_table FUNCTION
 
 
@@ -269,18 +358,21 @@ def populate_cars_table ()
 
 # # add default admin
 # create_default_admin_user()
-
+#
 # # populate province table
 # populate_province_table()
-
+#
 # # populate category table
 # populate_category_table()
 
 # # populate sections table
-# populate_sections_table ()
+# populate_sections_table()
 
 # # populate pages table
 # populate_pages_table()
 
-# populate cars table
-populate_cars_table()
+# # populate blocks table
+# populate_blocks_table()
+
+# # populate cars table
+# populate_cars_table()
