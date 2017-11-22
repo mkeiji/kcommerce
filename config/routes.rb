@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :users, path: "", path_names: {sign_in: 'login', sign_up: 'register', sign_out: 'logout'}
+
   # get "pages/:id", to: "pages#show", as: 'pages', id: /\d+/
   get "pages/:page_path", to: "pages#show", as: 'pages'
 

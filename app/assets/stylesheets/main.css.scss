@@ -9,6 +9,26 @@ $nav_font_size: 16px;
 
 /* Styles
 -----------------------------*/
+// stylling for the nav menu items
+div {
+  ul {
+    li {
+      // padding between the items
+      padding: $item_padding;
+
+      // font size for the nav menu
+      a {
+        font-size: $nav_font_size;
+      } //a
+    }//li
+  }//ul
+}//div
+
+// login controls (top right corner texts)
+#loginCtrl {
+  font-size: 1.5rem;
+}
+
 // Move down the second navbar
 #nav2 {
   margin-top: 8rem;
@@ -30,20 +50,6 @@ body {
   margin-top: $footer_padding;
 }
 
-// stylling for the nav menu items
-div {
-  ul {
-    li {
-      // padding between the items
-      padding: $item_padding;
-
-      // font size for the nav menu
-      a {
-        font-size: $nav_font_size;
-      } //a
-    }//li
-  }//ul
-}//div
 
 // jumbotron
 #site_banner {

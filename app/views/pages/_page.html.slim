@@ -6,7 +6,7 @@
         .jumbotron
           h1
             span.one = @current_page_object.title
-  
+
         / for contact
         - if @current_page_object.title == 'Contact'
           / use 'raw' because in the database the body has <p> tags
@@ -88,7 +88,7 @@
         .col-lg-8.col-md-6.mb-4
           .card
             .card-body
-              h2.card-title Car Details 
+              h2.card-title Car Details
               h5.card-text = raw "<b>Model: </b>" + @current_car_object.model
               h5.card-text = raw "<b>Make: </b>" + @current_car_object.make
               h5.card-text = raw "<b>Trim: </b>" + @current_car_object.trim

@@ -12,6 +12,12 @@ html
     link href="http://www.keiji.pcriot.com/site/css/img/K_LOGO.png" rel="icon"
 
   body
+    - if notice
+      .container
+        p.alert.alert-success = notice
+    - if alert
+      .container
+        p.alert.alert-danger = alert
     / nav bar
     / nav.navbar.navbar-default.navbar-static-top
     nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark role="navigation"
@@ -33,26 +39,39 @@ html
               / / to get path with page_path controler name + "page_path" column name (eg: ...pages/about)
               li.nav-item.active = link_to page.title, page_path(page.page_path), { :class => "nav-link" }
 
-        / sign in options (fixed)
-        ul.nav.navbar-nav 
-          li
-            p.navbar-btn 
-              a.btn.btn-primary href="#" Login
-          li
-            p.navbar-btn 
-              a.btn.btn-default href="#" Sign In
+        p.navbar-text.pull-right id='loginCtrl'
+          - if user_signed_in?
+            / .glyphicon.glyphicon-shopping-cart = "cart: #{session[:cart]} | "
+            = "cart: #{session[:cart]} | "
+            | Logged in as: <strong>#{current_user.email}</strong> |
+            = link_to ' Edit profile', edit_user_registration_path, {:class => 'navbar-link'}
+            = " | "
+            = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'
+          - else
+            = link_to "Login", new_user_session_path, {:class => 'navbar-link'}
+            = " | "
+            = link_to "Sign up", new_user_registration_path, {:class => 'navbar-link'}
+
+        / / sign in options (fixed)
+        / ul.nav.navbar-nav
+        /   li
+        /     p.navbar-btn
+        /       a.btn.btn-primary href="#" Login
+        /   li
+        /     p.navbar-btn
+        /       a.btn.btn-default href="#" Sign In
 
         / / tried using glyphicon
         / ul.nav.navbar-nav.navbar-right
-        /   li.glyphicon.glyphicon-log-in 
+        /   li.glyphicon.glyphicon-log-in
         /     span Login
-        /   li.glyphicon.glyphicon-user 
+        /   li.glyphicon.glyphicon-user
         /     span Sign In
 
     / second nav bar for the search function
     nav.navbar.navbar-toggleable-sm.bg-inverse.navbar-inverse.fixed-top id='nav2'
-      .container-fluid id='searchTool' 
-        .row-fluid 
+      .container-fluid id='searchTool'
+        .row-fluid
           / /! select menu for search
           / .col-sm-4
           /   select.form-control
