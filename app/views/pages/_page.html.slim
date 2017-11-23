@@ -81,9 +81,11 @@
       / creating row to store product details
       .row
         / creating product image card
-        .col-lg-3.col-md-6.mb-4
+        .col-lg-3.col-md-6.mb-4.text-center
           .card
             img.card-img-top = image_tag(image_file_name)
+          .card-footer
+            a = link_to 'Add to cart', "#", { :class => 'btn btn-primary'}
         / creating product details card
         .col-lg-8.col-md-6.mb-4
           .card

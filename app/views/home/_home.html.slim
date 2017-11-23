@@ -11,6 +11,60 @@
     /    span.four Your
     /    span.six  Dream Car TODAY!
 
+    / / DROPDOWN MENU
+    / .dropdown
+    /   a.dropdown data-target="#" data-toggle="dropdown" href="page.html"
+    /     | Dropdown
+    /     b.caret
+    /   ul.dropdown-menu
+    /     li
+    /       = link_to 'test', '#', :onclick => 'alert("Please no!")'
+    /     li
+    /       a href="#"  Another action
+
+    / filter by Car category_id
+    .form-inline.my-2.my-lg-0 id='filterbar'
+      | Filter by:
+      = form_tag(root_path, :method => "get") do
+        = select_tag 'category', options_for_select([['All', 'all'], ['Car Size', 'category_id'], ['Deals', 'status']], @category_param), :onchange => "this.form.submit();", :id => 'category_select'
+
+        / check if category of filtering
+        - if @category_param == 'category_id'
+          = form_tag(root_path, :method => "get") do
+            = select_tag 'search', options_for_select([ ['All', ''], ['Economic', 1], ['Standard', 2], ['Full Size', 3] ], @search_param), :onchange => "this.form.submit();", :id => 'carSize_select'
+
+        - if @category_param == 'status'
+          = form_tag(root_path, :method => "get") do
+            = select_tag 'search', options_for_select([ ['All', ''], ['On Sale', 'sale'], ['New', 'new'], ['Updated', 'updated'] ], @search_param), :onchange => "this.form.submit();"
+
+        = link_to 'Reset', root_path, :class => 'btn btn-secondary', :id => 'filter_reset_btn'
+
+
+        / / send data to coffeescript
+        / = content_tag "div", id: "test2", data: {item: "hello"} do
+
+      / = form_tag(root_path, :method => "get") do
+      /   = select_tag 'category', options_for_select([['All', ''], ['Car Size', 'category_id'], ['Deals', 'deals']]), :onchange => "this.form.submit();"
+      / - if @category == 'category_id'
+      /   = form_tag(root_path, :method => "get") do
+      /     = select_tag 'search', options_for_select([ ['All', ''], ['Economic', 1], ['Standard', 2], ['Full Size', 3] ]), :onchange => "this.form.submit();"
+
+      / = form_tag(root_path, :method => "get", id: "search-form") do
+      /   = select_tag 'category', options_for_select([['Car Size', 'category_id'], ['test', 8]]), :onchange => "this.form.submit();"
+      /   = select_tag 'search', options_for_select([ ['All', ''], ['Economic', 1], ['Standard', 2], ['Full Size', 3] ]), :onchange => "this.form.submit();"
+      /   = " "
+      /   = submit_tag "Filter", :name => nil, :class => "btn-secondary"
+    br/
+
+    / / filter by Car category_id
+    / .form-inline.my-2.my-lg-0 id='filterbar'
+    /   = form_tag(root_path, :method => "get", id: "search-form") do
+    /     = select_tag 'category', options_for_select([['Car Size', 'category_id']]), { :class => 'form-control' }
+    /     = select_tag 'search', options_for_select([ ['All', ''], ['Economic', 1], ['Standard', 2], ['Full Size', 3] ]), { :class => 'form-control' }
+    /     = " "
+    /     = submit_tag "Filter", :name => nil, :class => "btn-secondary"
+    / br/
+
     / check if there was a search
     - if @cars_to_be_displayed.size == 0
       h1 = "Unfortunately no match were found for '#{@search_param}' =("
@@ -34,4 +88,3 @@
 
     / adding pagination wiz kaminari and styling with another gem
     = paginate @cars_to_be_displayed, :theme => 'twitter-bootstrap-3'
-

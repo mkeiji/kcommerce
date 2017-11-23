@@ -1,6 +1,6 @@
 ActiveAdmin.register Car do
 
- permit_params :model, :make, :trim, :price, :stock_quantity, :image, :year, :description, :category_id
+ permit_params :model, :make, :trim, :price, :stock_quantity, :image, :year, :description, :status, :category_id
 
   # recreating index of the table displayed (hide the body column)
   index do
@@ -11,7 +11,7 @@ ActiveAdmin.register Car do
     column :trim, :sortable => :trim
     column :year, :sortable => :year
     column :price, :sortable => :price
-    column :image, :sortable => :image
+    column :status, :sortable => :status
     column :created_at, :sortable => :created_at
     column :updated_at, :sortable => :updated_at
     actions
@@ -29,6 +29,7 @@ ActiveAdmin.register Car do
       f.input :trim
       f.input :year
       f.input :price
+      f.input :status, :as => :select, :collection => ['sale', 'new', 'updated', 'normal']
       f.input :stock_quantity
       f.input :description, as: :html_editor, :label => "Description"
       f.input :image, :as => :file # make the input as a button to upload a file

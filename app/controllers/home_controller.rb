@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
-  
+
   # home page index action
-  # @param 
+  # @param
   # @return void
   def index
 
@@ -12,7 +12,9 @@ class HomeController < ApplicationController
     # cars to be displayed (using query function from model)
     @cars_to_be_displayed = Car.search(params[:category], params[:search], params[:page])
 
+    # variables to be used in the search and filter queries
     @search_param = params[:search]
+    @category_param = params[:category]
 
   end#end of index ACTION
 

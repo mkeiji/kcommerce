@@ -18,8 +18,12 @@ class Car < ApplicationRecord
   # @return (String): query with search or all products (with pagination)
   def self.search (category, search, page)
 
-    if search
-      
+    if category == 'all' || search == 'all'
+
+      order("id").page(page).per(4)
+
+    elsif search && category
+
       where("#{category} LIKE ?","%#{search}%").order("id").page(page).per(4)
 
     else
