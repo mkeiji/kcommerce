@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   # for cars detailed page
   get "pages/car/:id", to: "pages#show", as: "cars", id: /\d+/
 
+  # for cart
+  get "pages/cart/:cart", to: "pages#show", as: "cart"
+
   # add the show action to resources
-  resources :pages, only: [:show]
+  resources :pages
 
   root to: 'home#index'
 

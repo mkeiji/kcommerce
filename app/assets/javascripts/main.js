@@ -13,7 +13,7 @@ $(document).ready(function() {
   function test () {
     // document.getElementById("test1").innerHTML = "YOU CLICKED ME!";
     // document.getElementById("test").className = "btn btn-primary";
-    // alert(btnClass);
+    alert('HELLO');
 
   }//--end myFunction FUNCTION
 
@@ -24,6 +24,11 @@ $(document).ready(function() {
   var btnClass = document.getElementById("filter_reset_btn");
   // search box
   var searchBox = document.getElementById("search_text");
+
+  // // add to cart btn test
+  // document.getElementById("test").addEventListener('click', function () {
+  //   alert("hello");
+  // });
 
   // clear searchbox on load
   searchBox.value = "";

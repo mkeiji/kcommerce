@@ -72,7 +72,7 @@
           hr/
 
 / FOR CARS DETAILS PAGE
-- else
+- if @current_car_object != nil
   .container
   .fluid_container.one
     .container
@@ -85,7 +85,9 @@
           .card
             img.card-img-top = image_tag(image_file_name)
           .card-footer
-            a = link_to 'Add to cart', "#", { :class => 'btn btn-primary'}
+            a = link_to 'Back', root_path, :class => 'btn btn-primary'
+            = "  "
+            a = link_to 'Add to cart', cart_path(:cart => true, :item => @current_car_object.id),method: :get, :class => 'btn btn-primary', :id => "test"
         / creating product details card
         .col-lg-8.col-md-6.mb-4
           .card
@@ -99,3 +101,40 @@
               h5.card-text = raw "<b>Stock: </b>" + @current_car_object.stock_quantity.to_s
               h5.card-text = raw "<b>Category: </b>" + get_car_category_name(@current_car_object)
               h5.card-text = raw "<b>Description: </b>" + @current_car_object.description
+
+/ FOR CART
+- if @load_cart_page
+  .container
+    h1.text-center Your Cart Items
+    br
+
+    / / DEBUG
+    / = session[:cart]
+    / / DEBUG
+
+    / creating row to store cart items
+    .row
+      - session[:cart].each do |car_id|
+        - car_obj = Car.get_car(car_id)
+        / getting image file name (trim the full path)
+        - image_file_name = extract_car_image_filename(car_obj)
+        .col-lg-2
+        / creating product image card
+        .col-lg-3.col-md-6.mb-4.text-center
+          .card
+            - image_file_name
+            img.card-img-top = image_tag(image_file_name)
+        / creating product details card
+        .col-lg-6.col-md-6.mb-4
+          .card
+            .card-body
+              h2.card-title Car Details
+              h5.card-text = raw "<b>Model: </b>" + car_obj.model
+              h5.card-text = raw "<b>Make: </b>"  + car_obj.make
+              h5.card-text = raw "<b>Trim: </b>"  + car_obj.trim
+              h5.card-text = raw "<b>Year: </b>"  + car_obj.year.to_s
+              h5.card-text = raw "<b>Price: </b>" + car_obj.price.to_s
+            .card-footer
+              a = link_to 'Delete', cart_path(:cart => true, :item => car_obj.id, :delete_item => true), :class => 'btn btn-primary'
+      .col-md-6
+      .col-md-6 = link_to 'Continue Shopping', root_path, :class => 'btn btn-secondary'

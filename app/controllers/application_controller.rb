@@ -1,9 +1,15 @@
 class ApplicationController < ActionController::Base
 
+  # CONFIG
+  # ----------------------------------------------
   # define get_page_nav function to be accessable
   before_action :get_page_nav, :get_all_blocks
 
   protect_from_forgery with: :exception
+
+
+  # FUNCTIONS
+  # ----------------------------------------------
 
   # get_page_nav creates an instance var to store the pages from the db
   # @return void
