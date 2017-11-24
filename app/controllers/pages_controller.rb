@@ -44,15 +44,24 @@ class PagesController < ApplicationController
           # 4. check if there is a quantity item
           if params[:quantity]
 
-            # update the quantity by the amount passed
-            session[:cart][params[:item]] = params[:quantity]
+            # 5.delete item if quantity is zero
+            if params[:quantity].to_i == 0
+
+              session[:cart].delete(params[:item])
+
+            else
+
+              # update the quantity by the amount passed
+              session[:cart][params[:item]] = params[:quantity]
+
+            end#--end 5
 
           # 4.1 if there is not a quantity param
           else
 
             # update quantity by 1
             session[:cart][params[:item]] += 1
-            
+
           end#--end 4
 
         # if the car is not in the cart, just add it
