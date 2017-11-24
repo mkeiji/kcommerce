@@ -25,12 +25,32 @@ $(document).ready(function() {
   // search box
   var searchBox = document.getElementById("search_text");
 
-  // // add to cart btn test
-  // document.getElementById("test").addEventListener('click', function () {
-  //   alert("hello");
-  // });
+  // update cart btn test
+  document.getElementById("update_cart_btn").addEventListener('click', function () {
+    alert('OK');
+  });
 
   // clear searchbox on load
   searchBox.value = "";
+
+  // // quantity spinner from the cart
+  // (function ($) {
+  //   $('.spinner .btn:first-of-type').on('click', function() {
+  //     $('.spinner input').val( $('.spinner input').val() + 1);
+  //   });
+  //   $('.spinner .btn:last-of-type').on('click', function() {
+  //     $('.spinner input').val( $('.spinner input').val() - 1);
+  //   });
+  // })(jQuery);
+
+  // // using parse int
+  // (function ($) {
+  //   $('.spinner .btn:first-of-type').on('click', function() {
+  //     $('.spinner input').val( parseInt($('.spinner input').val(), 10) + 1);
+  //   });
+  //   $('.spinner .btn:last-of-type').on('click', function() {
+  //     $('.spinner input').val( parseInt($('.spinner input').val(), 10) - 1);
+  //   });
+  // })(jQuery);
 
 });//--end of document

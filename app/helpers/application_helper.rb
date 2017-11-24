@@ -5,7 +5,7 @@ module ApplicationHelper
     # @param (Car obj) car_object_from_db:
     # @return (String) car_image_file_name
     def extract_car_image_filename (car_object_from_db)
-      
+
         # extract the image file name
         car_image_file_name = car_object_from_db.image.to_s.sub!("/app/app/assets/images/", "")
         return car_image_file_name
@@ -31,5 +31,26 @@ module ApplicationHelper
         end#string size check
 
     end#--end of limit_text_length FUNCTION
+
+
+    # sums the values of a hash array
+    # @param (String) hash_array
+    # @return (String) sum
+    def sum_hash_array_values (hash_array)
+
+      sum = 0
+
+      hash_array.each do |key, value|
+
+        sum += value.to_i
+
+      end
+
+      return sum
+
+    end#--end of limit_text_length FUNCTION
+
+
+
 
 end#--end of ApplicationHelper MODULE

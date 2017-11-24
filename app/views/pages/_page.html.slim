@@ -87,7 +87,7 @@
           .card-footer
             a = link_to 'Back', root_path, :class => 'btn btn-primary'
             = "  "
-            a = link_to 'Add to cart', cart_path(:cart => true, :item => @current_car_object.id),method: :get, :class => 'btn btn-primary', :id => "test"
+            a = link_to 'Add to cart', cart_path(:cart => true, :item => @current_car_object.id), method: :get, :class => 'btn btn-primary', :id => "test"
         / creating product details card
         .col-lg-8.col-md-6.mb-4
           .card
@@ -105,16 +105,14 @@
 / FOR CART
 - if @load_cart_page
   .container
+    = session[:cart]
+    h1 = @debug
+
     h1.text-center Your Cart Items
     br
-
-    / / DEBUG
-    / = session[:cart]
-    / / DEBUG
-
     / creating row to store cart items
     .row
-      - session[:cart].each do |car_id|
+      - session[:cart].each do |car_id, qty|
         - car_obj = Car.get_car(car_id)
         / getting image file name (trim the full path)
         - image_file_name = extract_car_image_filename(car_obj)
@@ -135,6 +133,27 @@
               h5.card-text = raw "<b>Year: </b>"  + car_obj.year.to_s
               h5.card-text = raw "<b>Price: </b>" + car_obj.price.to_s
             .card-footer
-              a = link_to 'Delete', cart_path(:cart => true, :item => car_obj.id, :delete_item => true), :class => 'btn btn-primary'
+              .row
+                / delete btn
+                a.col-lg-1 = link_to 'Delete', cart_path(:cart => true, :item => car_obj.id, :delete_item => true), :class => 'btn btn-primary'
+                / quantity
+                p.col-lg-2.text-right = "Quantity: "
+                = form_tag(cart_path, :method => "get") do
+                  = number_field_tag :quantity, qty, :min => 0, :class => 'text-center'
+                  = hidden_field_tag 'item', car_obj.id
+                  = submit_tag "update", :class => 'btn btn-success'
+                / / for quantity check: https://codepen.io/Thomas-Lebeau/pen/csHqx
+                / / https://bootsnipp.com/snippets/featured/input-spinner-with-min-and-max-values
+                / / quantity spinner
+                / .input-group.spinner.col-lg-2
+                /   input.form-control.text-center min="0" type="number" value="#{qty}"
+                /   .input-group-btn-vertical
+                /     button.btn.btn-default type="button"
+                /       i.fa.fa-caret-up
+                /     button.btn.btn-default type="button"
+                /       i.fa.fa-caret-down
+                / / update cart btn
+                / a.col-lg-1 = link_to 'Update Cart', '#', :class => 'btn btn-success', :id => 'update_cart_btn'
+
       .col-md-6
       .col-md-6 = link_to 'Continue Shopping', root_path, :class => 'btn btn-secondary'

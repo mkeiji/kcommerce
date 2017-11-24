@@ -29,21 +29,48 @@ class PagesController < ApplicationController
 
       @load_cart_page = true
 
-      # if there is an item, add to cart
+      # 1. if there is an item, add to cart
       if params[:item]
-        # create session cart if there is none
+
+        # 2. create session cart if there is none
         if !session[:cart]
-          session[:cart] = []
-        end
+          session[:cart] = Hash.new
+        end#--end 2
 
-        session[:cart] << params[:item]
+        # 3. add to cart
+        # check if the car id is already in the cart
+        if session[:cart].key?(params[:item])
 
-        # check if there was a delete request
-        if params[:delete_item]
-          session[:cart].delete(params[:item])
-        end
+          # 4. check if there is a quantity item
+          if params[:quantity]
 
-      end#--end item check
+            # update the quantity by the amount passed
+            session[:cart][params[:item]] = params[:quantity]
+
+          # 4.1 if there is not a quantity param
+          else
+
+            # update quantity by 1
+            session[:cart][params[:item]] += 1
+            
+          end#--end 4
+
+        # if the car is not in the cart, just add it
+        else
+
+          session[:cart][params[:item]] = 1
+
+        end#--end 3
+
+        # redirect
+        # redirect_to cars_path(params[:item])
+
+      end#--end 1
+
+      # check if there was a delete request
+      if params[:delete_item]
+        session[:cart].delete(params[:item])
+      end
 
       # http://www.peachpit.com/articles/article.aspx?p=1278994&seqNum=4
       # # To remove an item from the middle of the array, use delete_at, providing it the index position of the item to be deleted:
