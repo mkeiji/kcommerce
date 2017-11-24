@@ -1,10 +1,20 @@
 // Loading the document
+// executes everything that is inside when HTML-Document is loaded and DOM is ready
 $(document).ready(function() {
-   // executes when HTML-Document is loaded and DOM is ready
-
-
-
+  
   /****************************** FUNCTIONS ******************************/
+  /*
+   * execute on load
+   * @param
+   * @return
+   */
+  function init() {
+    // Clear forms here
+    document.getElementById("search_text").value = "";
+
+  }//--end init FUNCTION
+
+
   /*
    *
    * @param
@@ -17,21 +27,6 @@ $(document).ready(function() {
 
   }//--end myFunction FUNCTION
 
-
-
-  /****************************** EXEC ******************************/
-  // reset btn
-  var btnClass = document.getElementById("filter_reset_btn");
-  // search box
-  var searchBox = document.getElementById("search_text");
-
-  // update cart btn test
-  document.getElementById("update_cart_btn").addEventListener('click', function () {
-    alert('OK');
-  });
-
-  // clear searchbox on load
-  searchBox.value = "";
 
   // // quantity spinner from the cart
   // (function ($) {
@@ -52,5 +47,12 @@ $(document).ready(function() {
   //     $('.spinner input').val( parseInt($('.spinner input').val(), 10) - 1);
   //   });
   // })(jQuery);
+
+
+  /****************************** EXEC ******************************/
+  // on window load execute init()
+  window.onload = init();
+
+
 
 });//--end of document
