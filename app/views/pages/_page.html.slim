@@ -97,7 +97,7 @@
               h5.card-text = raw "<b>Make: </b>" + @current_car_object.make
               h5.card-text = raw "<b>Trim: </b>" + @current_car_object.trim
               h5.card-text = raw "<b>Year: </b>" + @current_car_object.year.to_s
-              h5.card-text = raw "<b>Price: </b>" + @current_car_object.price.to_s
+              h5.card-text = raw "<b>Price: </b>" + to_str_currency(@current_car_object.price)
               h5.card-text = raw "<b>Stock: </b>" + @current_car_object.stock_quantity.to_s
               h5.card-text = raw "<b>Category: </b>" + get_car_category_name(@current_car_object)
               h5.card-text = raw "<b>Description: </b>" + @current_car_object.description
@@ -105,52 +105,116 @@
 / FOR CART
 - if @load_cart_page
   .container
-    h1.text-center Your Cart Items
-    br
-    / creating row to store cart items
-    .row
-      - session[:cart].each do |car_id, qty|
-        - car_obj = Car.get_car(car_id)
-        / getting image file name (trim the full path)
-        - image_file_name = extract_car_image_filename(car_obj)
-        .col-lg-2
-        / creating product image card
-        .col-lg-3.col-md-6.mb-4.text-center
-          .card
-            - image_file_name
-            img.card-img-top = image_tag(image_file_name)
-        / creating product details card
-        .col-lg-6.col-md-6.mb-4
-          .card
-            .card-body
-              h2.card-title Car Details
-              h5.card-text = raw "<b>Model: </b>" + car_obj.model
-              h5.card-text = raw "<b>Make: </b>"  + car_obj.make
-              h5.card-text = raw "<b>Trim: </b>"  + car_obj.trim
-              h5.card-text = raw "<b>Year: </b>"  + car_obj.year.to_s
-              h5.card-text = raw "<b>Price: </b>" + car_obj.price.to_s
-            .card-footer
-              .row
-                / delete btn
-                a.col-lg-1 = link_to 'Delete', cart_path(:cart => true, :item => car_obj.id, :delete_item => true), :class => 'btn btn-primary'
-                / quantity
-                p.col-lg-2.text-right = "Quantity: "
-                = form_tag(cart_path, :method => "get") do
-                  = number_field_tag :quantity, qty, :min => 0, :class => 'text-center'
-                  = hidden_field_tag 'item', car_obj.id
-                  = submit_tag "update", :class => 'btn btn-success'
-                / / for quantity check: https://codepen.io/Thomas-Lebeau/pen/csHqx
-                / / https://bootsnipp.com/snippets/featured/input-spinner-with-min-and-max-values
-                / / quantity spinner
-                / .input-group.spinner.col-lg-2
-                /   input.form-control.text-center min="0" type="number" value="#{qty}"
-                /   .input-group-btn-vertical
-                /     button.btn.btn-default type="button"
-                /       i.fa.fa-caret-up
-                /     button.btn.btn-default type="button"
-                /       i.fa.fa-caret-down
-                / / update cart btn
-                / a.col-lg-1 = link_to 'Update Cart', '#', :class => 'btn btn-success', :id => 'update_cart_btn'
 
-      .col-md-6
-      .col-md-6 = link_to 'Continue Shopping', root_path, :class => 'btn btn-secondary'
+    / cart content
+    .row
+      .col-xs-2
+      .col-xs-8
+        .panel.panel-info
+          .panel-heading
+            .panel-title
+
+              / header
+              .row
+                .col-xs-6
+                  h5
+                    span.glyphicon.glyphicon-shopping-cart
+                    | Shopping Cart
+                .col-xs-6 = link_to 'Continue Shopping', root_path, :class => 'btn btn-primary btn-sm btn-block glyphicon glyphicon-share-alt'
+
+          / cart body
+          .panel-body
+            /container for total
+            - total_value = 0
+            / loopt through items
+            - session[:cart].each do |car_id, qty|
+              - car_obj = Car.get_car(car_id)
+              - total_value += car_obj.price * qty.to_i
+              /getting image file name (trim the full path)
+              - image_file_name = extract_car_image_filename(car_obj)
+              .row
+                / image
+                .col-xs-2
+                  img.img-responsive = image_tag(image_file_name, :size => "100x70")
+                / name and description
+                .col-xs-4
+                  h4.product-name
+                    strong = "#{car_obj.make} - #{car_obj.model} #{car_obj.trim} #{car_obj.year.to_s}"
+                  h4
+                    small = limit_text_length(car_obj.description, 40)
+                / price
+                .col-xs-6
+                  .col-xs-4.text-right
+                    h6
+                      strong = to_str_currency(car_obj.price)
+                      = " x "
+                  / quantity
+                  .col-xs-4
+                    = form_tag(cart_path, :method => "get") do
+                      .row
+                        = number_field_tag :quantity, qty, :min => 0, :class => 'text-center', :id => 'cart_qty_box'
+                        = hidden_field_tag 'item', car_obj.id
+                        = submit_tag "update", :class => 'btn glyphicon glyphicon-trash', :id => 'cart_update_btn'
+                  .col-xs-2
+                    = link_to 'Delete', cart_path(:cart => true, :item => car_obj.id, :quantity => 0), :class => 'btn btn-danger'
+              hr
+            .panel-footer
+              .row.text-center
+                .col-xs-9
+                  h4.text-right = "Total (before taxes): #{to_str_currency(total_value)}"
+                .col-xs-3
+                  = link_to 'Checkout & Pay', '#', :class => 'btn btn-success btn-block'
+
+
+  /.container
+  /  h1.text-center Your Cart Items
+  /  br
+  /  / creating row to store cart items
+  /  .row
+  /    - session[:cart].each do |car_id, qty|
+  /      - car_obj = Car.get_car(car_id)
+  /      / getting image file name (trim the full path)
+  /      - image_file_name = extract_car_image_filename(car_obj)
+  /      .col-lg-2
+  /      / creating product image card
+  /      .col-lg-3.col-md-6.mb-4.text-center
+  /        .card
+  /          - image_file_name
+  /          img.card-img-top = image_tag(image_file_name)
+  /      / creating product details card
+  /      .col-lg-6.col-md-6.mb-4
+  /        .card
+  /          .card-body
+  /            h2.card-title Car Details
+  /            h5.card-text = raw "<b>Model: </b>" + car_obj.model
+  /            h5.card-text = raw "<b>Make: </b>"  + car_obj.make
+  /            h5.card-text = raw "<b>Trim: </b>"  + car_obj.trim
+  /            h5.card-text = raw "<b>Year: </b>"  + car_obj.year.to_s
+  /            h5.card-text = raw "<b>Price: </b>" + car_obj.price.to_s
+  /          .card-footer
+  /            .row
+  /              / delete btn
+  /              a.col-lg-1 = link_to 'Delete', cart_path(:cart => true, :item => car_obj.id, :quantity => 0), :class => 'btn btn-primary'
+  /              / quantity
+  /              p.col-lg-2.text-right = "Quantity: "
+  /              = form_tag(cart_path, :method => "get") do
+  /                = number_field_tag :quantity, qty, :min => 0, :class => 'text-center'
+  /                = hidden_field_tag 'item', car_obj.id
+  /                = submit_tag "update", :class => 'btn btn-success'
+  
+  /              / / for quantity check: https://codepen.io/Thomas-Lebeau/pen/csHqx
+  /              / / https://bootsnipp.com/snippets/featured/input-spinner-with-min-and-max-values
+  /              / / quantity spinner
+  /              / .input-group.spinner.col-lg-2
+  /              /   input.form-control.text-center min="0" type="number" value="#{qty}"
+  /              /   .input-group-btn-vertical
+  /              /     button.btn.btn-default type="button"
+  /              /       i.fa.fa-caret-up
+  /              /     button.btn.btn-default type="button"
+  /              /       i.fa.fa-caret-down
+  /              / / update cart btn
+  /              / a.col-lg-1 = link_to 'Update Cart', '#', :class => 'btn btn-success', :id => 'update_cart_btn'
+  /
+  /    .col-md-6
+  /    .col-md-2 = link_to 'Continue Shopping', root_path, :class => 'btn btn-secondary'
+  /    .col-md-2 = link_to 'Check Out', '#', :class => 'btn btn-secondary'

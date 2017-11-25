@@ -82,7 +82,8 @@
               img = image_tag(image_file_name)
               .card-body
                 h4.card-title = car.make + " " + car.model + " " + car.year.to_s
-                p.card-text = limit_text_length(car.description)
+                h5.card-text = to_str_currency(car.price)
+                p.card-text = limit_text_length(car.description, 80)
               .card-footer
                 a = link_to 'Find Out More!', cars_path(car.id), { :class => 'btn btn-primary'}
 

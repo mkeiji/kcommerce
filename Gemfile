@@ -37,6 +37,9 @@ gem 'font-awesome-rails'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 
+# formating number to money
+gem 'money-rails', '~>1'
+
 
 #*************** PROJECT DEFAULT GEMS ***************
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
