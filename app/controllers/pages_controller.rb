@@ -81,12 +81,48 @@ class PagesController < ApplicationController
 
       end#--end 1
 
-      # # DC - check if there was a delete request
-      # if params[:delete_item]
-      #   session[:cart].delete(params[:item])
-      # end#--end of DC
-
     end#--end of CE
+
+
+    # for CHECKOUT page
+    # ------------------------------------
+    # CC - check if is a checkout page request
+    if params[:checkout]
+
+      # set load checkout page flag
+      @load_checkout_page = true
+
+      # CP - check if user has a customer profile
+      if Customer.exists?(User.find(params[:user]).customer_id)
+        @cust_obj = User.get_user_customer_obj(params[:user])
+        @cust_id = User.find(params[:user]).customer_id
+        @cust_pst = Province.get_pst(@cust_obj.province_id)
+        @cust_gst = Province.get_gst(@cust_obj.province_id)
+        @cust_hst = Province.get_hst(@cust_obj.province_id)
+
+        # CU - check if there is a user update request
+        if params[:update_customer]
+          @cust_obj.update(first_name: params[:first_name])
+          @cust_obj.update(last_name: params[:last_name])
+          @cust_obj.update(address: params[:address])
+          @cust_obj.update(city: params[:city])
+          @cust_obj.update(postal_code: params[:postal_code])
+          @cust_obj.update(province_id: params[:province_id])
+
+          # update the taxes values
+          @cust_pst = Province.get_pst(@cust_obj.province_id)
+          @cust_gst = Province.get_gst(@cust_obj.province_id)
+          @cust_hst = Province.get_hst(@cust_obj.province_id)
+        end#--end CU
+
+      else
+        @cust_obj = false
+      end#--end CP
+
+
+
+    end#--end CC
+
 
   end#--end of show FUNCTION
 

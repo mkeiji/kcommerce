@@ -163,58 +163,194 @@
                 .col-xs-9
                   h4.text-right = "Total (before taxes): #{to_str_currency(total_value)}"
                 .col-xs-3
-                  = link_to 'Checkout & Pay', '#', :class => 'btn btn-success btn-block'
+                  = link_to 'Checkout & Pay', checkout_path(:checkout => true, :user => current_user.id), :class => 'btn btn-success btn-block'
 
 
-  /.container
-  /  h1.text-center Your Cart Items
-  /  br
-  /  / creating row to store cart items
-  /  .row
-  /    - session[:cart].each do |car_id, qty|
-  /      - car_obj = Car.get_car(car_id)
-  /      / getting image file name (trim the full path)
-  /      - image_file_name = extract_car_image_filename(car_obj)
-  /      .col-lg-2
-  /      / creating product image card
-  /      .col-lg-3.col-md-6.mb-4.text-center
-  /        .card
-  /          - image_file_name
-  /          img.card-img-top = image_tag(image_file_name)
-  /      / creating product details card
-  /      .col-lg-6.col-md-6.mb-4
-  /        .card
-  /          .card-body
-  /            h2.card-title Car Details
-  /            h5.card-text = raw "<b>Model: </b>" + car_obj.model
-  /            h5.card-text = raw "<b>Make: </b>"  + car_obj.make
-  /            h5.card-text = raw "<b>Trim: </b>"  + car_obj.trim
-  /            h5.card-text = raw "<b>Year: </b>"  + car_obj.year.to_s
-  /            h5.card-text = raw "<b>Price: </b>" + car_obj.price.to_s
-  /          .card-footer
-  /            .row
-  /              / delete btn
-  /              a.col-lg-1 = link_to 'Delete', cart_path(:cart => true, :item => car_obj.id, :quantity => 0), :class => 'btn btn-primary'
-  /              / quantity
-  /              p.col-lg-2.text-right = "Quantity: "
-  /              = form_tag(cart_path, :method => "get") do
-  /                = number_field_tag :quantity, qty, :min => 0, :class => 'text-center'
-  /                = hidden_field_tag 'item', car_obj.id
-  /                = submit_tag "update", :class => 'btn btn-success'
-  
-  /              / / for quantity check: https://codepen.io/Thomas-Lebeau/pen/csHqx
-  /              / / https://bootsnipp.com/snippets/featured/input-spinner-with-min-and-max-values
-  /              / / quantity spinner
-  /              / .input-group.spinner.col-lg-2
-  /              /   input.form-control.text-center min="0" type="number" value="#{qty}"
-  /              /   .input-group-btn-vertical
-  /              /     button.btn.btn-default type="button"
-  /              /       i.fa.fa-caret-up
-  /              /     button.btn.btn-default type="button"
-  /              /       i.fa.fa-caret-down
-  /              / / update cart btn
-  /              / a.col-lg-1 = link_to 'Update Cart', '#', :class => 'btn btn-success', :id => 'update_cart_btn'
-  /
-  /    .col-md-6
-  /    .col-md-2 = link_to 'Continue Shopping', root_path, :class => 'btn btn-secondary'
-  /    .col-md-2 = link_to 'Check Out', '#', :class => 'btn btn-secondary'
+/ FOR CHECKOUT
+- if @load_checkout_page
+  h1 = 'You are in the checkout page'
+  = @cust_obj.inspect
+
+  .container
+    .row
+      / SHIPPING ADDRESS
+      .col-xs-6
+        .panel.panel-info
+          .panel-heading
+            .panel-title
+              / header
+              .row
+                .col-xs-6
+                  h5
+                    span.checkout-header =  "Shipping Address"
+            .panel-body
+              .form-group
+                .col-md-12
+                  h4.checkout-title = "Customer Information"
+              = form_tag(checkout_path, :method => "get") do
+                .form-group
+                  .col-md-6.col-xs-12
+                    strong.checkout-item = "First Name:"
+                    - if @cust_obj
+                      input.form-control name="first_name" type="text" value="#{@cust_obj.first_name}"
+                    - else
+                      input.form-control name="first_name" type="text" value=""
+                  .span1
+                  .col-md-6.col-xs-12
+                    strong.checkout-item = "Last Name:"
+                    - if @cust_obj
+                      input.form-control name="last_name" type="text" value="#{@cust_obj.last_name}"
+                    - else
+                      input.form-control name="last_name" type="text" value=""
+                .form-group
+                  .col-md-12
+                    strong.checkout-item = "Province:"
+                  .col-md-12
+                    - if @cust_obj
+                      = select_tag 'province_id', options_for_select( [ ['Manitoba', 1],
+                              ['British Columbia', 2],
+                              ['Alberta', 3],
+                              ['New Brunswick', 4],
+                              ['Newfoundland and Labrador', 5],
+                              ['Northwest Territories', 6],
+                              ['Nova Scotia', 7],
+                              ['Nunavut', 8],
+                              ['Ontario', 9],
+                              ['Prince Edward Island', 10],
+                              ['Quebec', 11],
+                              ['Saskatchewan', 12],
+                              ['Yukon', 13] ], @cust_obj.province_id )
+                    - else
+                      = select_tag 'province_id', options_for_select( [ ['Manitoba', 1],
+                              ['British Columbia', 2],
+                              ['Alberta', 3],
+                              ['New Brunswick', 4],
+                              ['Newfoundland and Labrador', 5],
+                              ['Northwest Territories', 6],
+                              ['Nova Scotia', 7],
+                              ['Nunavut', 8],
+                              ['Ontario', 9],
+                              ['Prince Edward Island', 10],
+                              ['Quebec', 11],
+                              ['Saskatchewan', 12],
+                              ['Yukon', 13] ] )
+                .form-group
+                  .col-md-12
+                    strong.checkout-item = "Address:"
+                  .col-md-12
+                    - if @cust_obj
+                      input.form-control name="address" type="text" value="#{@cust_obj.address}"
+                    - else
+                      input.form-control name="address" type="text" value=""
+                .form-group
+                  .col-md-12
+                    strong.checkout-item = "City:"
+                  .col-md-12
+                    - if @cust_obj
+                      input.form-control name="city" type="text" value="#{@cust_obj.city}"
+                    - else
+                      input.form-control name="city" type="text" value=""
+                .form-group
+                  .col-md-12
+                    strong.checkout-item = 'Zip / Postal Code:'
+                  .col-md-12
+                    - if @cust_obj
+                      input.form-control name="postal_code" type="text" value="#{@cust_obj.postal_code}"
+                    - else
+                      input.form-control name="postal_code" type="text" value=""
+                .form-group
+                  .col-md-12 id='checkout-btns'
+                    - if @cust_obj == false
+                      = hidden_field_tag 'user', current_user.id
+                      = hidden_field_tag 'create_customer', true
+                      = submit_tag "Create", :class => 'btn btn-primary'
+                    - else
+                      = hidden_field_tag 'user', current_user.id
+                      = hidden_field_tag 'update_customer', true
+                      = submit_tag "Update", :class => 'btn btn-primary'
+
+      / ORDER REVIEW
+      .col-xs-6
+        .panel.panel-info
+          .panel-heading
+            .panel-title
+              / header
+              .row
+                .col-xs-6
+                  h5
+                    span.checkout-header = "Order Review"
+            / body
+            .panel-body
+              / container for subtotal
+              - checkout_subtotal = 0
+              - checkout_pst = 0
+              - checkout_gst = 0
+              - checkout_hst = 0
+              - checkout_total = 0
+              / loopt through items
+              - session[:cart].each do |car_id, qty|
+                / get car obj and calculate subtotal
+                - car_obj = Car.get_car(car_id)
+                / update subtotal values
+                - checkout_subtotal += car_obj.price * qty.to_i
+                / getting image file name (trim the full path)
+                - image_file_name = extract_car_image_filename(car_obj)
+                / display cars in cart
+                .row
+                  .col-sm-3.col-xs-3
+                    img.img-responsive = image_tag(image_file_name, :size => "100x70")
+                  .col-sm-6.col-xs-6
+                    h3.col-xs-12 = "#{car_obj.make} - #{car_obj.model} #{car_obj.trim} #{car_obj.year.to_s}"
+                    h4.col-xs-12
+                      p = "Quantity:"
+                      p = qty
+                  .col-sm-3.col-xs-3.text-right
+                    h1 = to_str_currency(car_obj.price)
+
+              / update taxes and total
+              - if @cust_obj
+                - checkout_pst = checkout_subtotal * @cust_pst
+                - checkout_gst = checkout_subtotal * @cust_gst
+                - checkout_hst = checkout_subtotal * @cust_hst
+                - checkout_total = checkout_pst + checkout_gst + checkout_hst + checkout_subtotal
+              - else
+                - checkout_pst = 0
+                - checkout_gst = 0
+                - checkout_hst = 0
+                - checkout_total = checkout_pst + checkout_gst + checkout_hst + checkout_subtotal
+
+            / footer
+            .panel-footer
+              .row
+                .col-sm-3.col-xs-3
+                  h3.col-xs-12 = "Subtotal"
+                .col-sm-6.col-xs-6
+                .col-sm-3.col-xs-3.text-right
+                  h1 = to_str_currency(checkout_subtotal)
+              - if checkout_pst != 0
+                .row
+                  .col-sm-3.col-xs-3
+                    h3.col-xs-12 = "PST: "
+                  .col-sm-6.col-xs-6
+                  .col-sm-3.col-xs-3.text-right
+                    h1 = to_str_currency(checkout_pst)
+              - if checkout_gst != 0
+                .row
+                  .col-sm-3.col-xs-3
+                    h3.col-xs-12 = "GST: "
+                  .col-sm-6.col-xs-6
+                  .col-sm-3.col-xs-3.text-right
+                    h1 = to_str_currency(checkout_gst)
+              - if checkout_hst != 0
+                .row
+                  .col-sm-3.col-xs-3
+                    h3.col-xs-12 = "HST: "
+                  .col-sm-6.col-xs-6
+                  .col-sm-3.col-xs-3.text-right
+                    h1 = to_str_currency(checkout_hst)
+              .row
+                .col-sm-3.col-xs-3
+                  h3.col-xs-12 = "Total"
+                .col-sm-6.col-xs-6
+                .col-sm-3.col-xs-3.text-right
+                  h1 = to_str_currency(checkout_total)

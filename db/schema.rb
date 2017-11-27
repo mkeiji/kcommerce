@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122215917) do
+ActiveRecord::Schema.define(version: 20171127015526) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20171122215917) do
     t.string "model"
     t.string "make"
     t.string "trim"
-    t.decimal "price", precision: 10
+    t.decimal "price", precision: 10, scale: 2
     t.integer "stock_quantity"
     t.string "image"
     t.datetime "created_at", null: false
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20171122215917) do
 
   create_table "line_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "quantity"
-    t.decimal "price", precision: 10
+    t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "order_id"
@@ -105,9 +105,9 @@ ActiveRecord::Schema.define(version: 20171122215917) do
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "status"
-    t.decimal "pst_rate", precision: 10
-    t.decimal "gst_rate", precision: 10
-    t.decimal "hst_rate", precision: 10
+    t.decimal "pst_rate", precision: 10, scale: 2
+    t.decimal "gst_rate", precision: 10, scale: 2
+    t.decimal "hst_rate", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
@@ -128,9 +128,9 @@ ActiveRecord::Schema.define(version: 20171122215917) do
 
   create_table "provinces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
-    t.decimal "pst", precision: 10
-    t.decimal "gst", precision: 10
-    t.decimal "hst", precision: 10
+    t.decimal "pst", precision: 10, scale: 3
+    t.decimal "gst", precision: 10, scale: 3
+    t.decimal "hst", precision: 10, scale: 3
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

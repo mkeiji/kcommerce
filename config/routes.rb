@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   # for cart
   get "pages/cart/:cart", to: "pages#show", as: "cart"
 
+  # for checkout
+  get "pages/checkout/:checkout", to: "pages#show", as: "checkout"
+
   # add the show action to resources
   resources :pages
 
