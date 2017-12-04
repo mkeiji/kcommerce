@@ -111,9 +111,15 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    dotenv (2.2.1)
+    dotenv-rails (2.2.1)
+      dotenv (= 2.2.1)
+      railties (>= 3.2, < 5.2)
     ejs (1.1.1)
     erubi (1.6.1)
     execjs (2.7.0)
+    faraday (0.13.1)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
@@ -177,6 +183,7 @@ GEM
       money (~> 6.9.0)
       railties (>= 3.0)
     multi_json (1.12.2)
+    multipart-post (2.0.0)
     mysql2 (0.4.9)
     nio4r (2.1.0)
     nokogiri (1.8.0)
@@ -265,6 +272,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stripe (3.8.0)
+      faraday (~> 0.10)
     temple (0.8.0)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
@@ -306,6 +315,7 @@ DEPENDENCIES
   carrierwave (~> 1.0)
   coffee-rails (~> 4.2)
   devise
+  dotenv-rails
   font-awesome-rails
   jbuilder (~> 2.5)
   kaminari
@@ -320,6 +330,7 @@ DEPENDENCIES
   slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)
+  stripe
   therubyracer
   turbolinks (~> 5)
   tzinfo-data
@@ -327,4 +338,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.15.4
+   1.16.0.pre.3

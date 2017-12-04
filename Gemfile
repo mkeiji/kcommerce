@@ -7,6 +7,9 @@ end
 
 
 #*************** PROJECT SPECIFIC GEMS ***************
+# dotenv
+gem 'dotenv-rails'
+
 # device (authentication gem)
 gem 'devise'
 
@@ -39,6 +42,9 @@ gem 'bootstrap-kaminari-views'
 
 # formating number to money
 gem 'money-rails', '~>1'
+
+# stripe API
+gem 'stripe'
 
 
 #*************** PROJECT DEFAULT GEMS ***************

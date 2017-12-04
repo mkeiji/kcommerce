@@ -20,3 +20,6 @@
 
 # ignore the default uploads folder from carrierwave
 /public/uploads
+
+# ignore .env
+/.env

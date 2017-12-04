@@ -87,7 +87,8 @@
           .card-footer
             a = link_to 'Back', root_path, :class => 'btn btn-primary'
             = "  "
-            a = link_to 'Add to cart', cart_path(:cart => true, :item => @current_car_object.id), method: :get, :class => 'btn btn-primary', :id => "test"
+            - if user_signed_in?
+              a = link_to 'Add to cart', cart_path(:cart => true, :item => @current_car_object.id), method: :get, :class => 'btn btn-primary', :id => "test"
         / creating product details card
         .col-lg-8.col-md-6.mb-4
           .card
@@ -163,15 +164,21 @@
                 .col-xs-9
                   h4.text-right = "Total (before taxes): #{to_str_currency(total_value)}"
                 .col-xs-3
-                  = link_to 'Checkout & Pay', checkout_path(:checkout => true, :user => current_user.id), :class => 'btn btn-success btn-block'
+                  = link_to 'Checkout & Pay', checkout_path(:checkout => true, :user => current_user.id), method: :post, :class => 'btn btn-success btn-block'
 
 
 / FOR CHECKOUT
 - if @load_checkout_page
-  h1 = 'You are in the checkout page'
-  = @cust_obj.inspect
+  /*** DEBUG ***
+  /= @cust_obj.inspect
+  /br
+  /= 'CART: '
+  /= session[:cart]
+  /*** DEBUG ***
 
   .container
+    h1.text-center Checkout
+    br
     .row
       / SHIPPING ADDRESS
       .col-xs-6
@@ -187,7 +194,7 @@
               .form-group
                 .col-md-12
                   h4.checkout-title = "Customer Information"
-              = form_tag(checkout_path, :method => "get") do
+              = form_tag(checkout_path, :method => "post") do
                 .form-group
                   .col-md-6.col-xs-12
                     strong.checkout-item = "First Name:"
@@ -354,3 +361,42 @@
                 .col-sm-6.col-xs-6
                 .col-sm-3.col-xs-3.text-right
                   h1 = to_str_currency(checkout_total)
+
+            / show place order and pay btn only if the user already has a customer
+            - if @cust_obj != false
+              - amount_in_cents = checkout_total * 100
+              = form_tag(pay_path(:pay => true, :user => current_user.id, :amount => amount_in_cents.to_i), :method => "post") do
+                script.stripe-button data-amount="#{amount_in_cents}" data-description=("Payment") data-key="#{Rails.configuration.stripe[:publishable_key]}" data-locale="auto" src="https://checkout.stripe.com/checkout.js"
+
+              / / simple link to btn (without stripe)
+              /= link_to 'Place Order & Pay', pay_path(:pay => true, :user => current_user.id), method: :post, :class => 'btn btn-success btn-block', :id => 'checkout_pay_btn'
+
+
+/ FOR PAYMENT
+- if @load_pay_page
+  .container
+    .row
+      .col-xs-2
+      .col-xs-8
+        .panel.panel-info
+          .panel-heading
+            .panel-title
+
+              / header
+              .row.text-center
+                .col-xs-6
+                  h5
+                    span = 'PAYMENT RECEIVED & ORDER PLACED'
+
+          / cart body
+          .panel-body
+              .row.text-center
+                .col-xs-12
+                  h3 = 'THANK YOU for shopping with us!'
+                  h5 = 'Your Payment went through and we will begin to process your order'
+                  h5 = 'You will receive your receipt in your email in a few moments'
+              hr
+          .panel-footer
+            .row.text-center
+              .col-xs-12
+                = link_to 'Exit', root_path, :class => 'btn btn-success btn-block'

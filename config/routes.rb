@@ -12,10 +12,13 @@ Rails.application.routes.draw do
   get "pages/cart/:cart", to: "pages#show", as: "cart"
 
   # for checkout
-  get "pages/checkout/:checkout", to: "pages#show", as: "checkout"
+  post "pages/checkout/:checkout", to: "pages#show", as: "checkout"
+
+  # for payment
+  post "pages/pay/:pay", to: "pages#show", as: "pay"
 
   # add the show action to resources
-  resources :pages
+  resources :pages, only: [:show]
 
   root to: 'home#index'
 

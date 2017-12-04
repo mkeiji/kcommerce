@@ -16,6 +16,9 @@ class HomeController < ApplicationController
     @search_param = params[:search]
     @category_param = params[:category]
 
+    # # testing dotenv file (needs to restart the server for every change)
+    # @envTest = ENV['TEST']
+
   end#end of index ACTION
 
 end#--end of HomeController CLASS
