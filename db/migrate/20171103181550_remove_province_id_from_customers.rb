@@ -1,5 +1,5 @@
 class RemoveProvinceIdFromCustomers < ActiveRecord::Migration[5.1]
   def change
-    remove_column :customers, :province_id, :integer
+    remove_column :customers, :Province_id, :integer
   end
 end

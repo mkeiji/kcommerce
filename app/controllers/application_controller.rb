@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   # @return void
   def get_page_nav
 
-    @page_nav = Page.where("display_in_menu = true && is_published = true").order(id: :asc)
+    @page_nav = Page.where("display_in_menu = true").where("is_published = true").order(id: :asc)
 
   end #end get_page_nav FUNCTION
 

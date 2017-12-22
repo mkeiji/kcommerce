@@ -10,7 +10,7 @@
 # @return void
 def create_default_admin_user ()
 
-  AdminUser.create!(email: 'keiji@admin.com', password: 'letmein', password_confirmation: 'letmein') if Rails.env.development?
+  AdminUser.create!(email: 'keiji@email.com', password: '123123', password_confirmation: '123123') if Rails.env.development?
 
 end #--end of create_default_admin_user FUNCTION
 
@@ -77,10 +77,14 @@ def populate_sections_table ()
   # sections to be inserted
   sections = [ { name: 'Company' } ]
 
-  # add sections to table
-  new_section = Section.new(name: sections[:name])
+  sections.each do |section|
 
-  new_section.save
+    # add sections to table
+    new_section = Section.new(name: section[:name])
+
+    new_section.save
+
+  end
 
 end #--end of populate_sections_table FUNCTION
 
@@ -106,7 +110,7 @@ def populate_pages_table ()
       is_published: true,
       display_in_menu: true,
       page_path: 'contact',
-      section_id: Section.find(1)
+      section_id: 1
     }
   ]
 
@@ -140,7 +144,7 @@ def populate_blocks_table ()
       show_title: true,
       is_published: true,
       bootstrap_class: '',
-      page: Page.find(2),
+      page: Page.find(3),
       order: 1
     },
     {
@@ -150,7 +154,7 @@ def populate_blocks_table ()
       show_title: true,
       is_published: true,
       bootstrap_class: '',
-      page: Page.find(2),
+      page: Page.find(3),
       order: 2
     },
     {
@@ -160,7 +164,7 @@ def populate_blocks_table ()
       show_title: true,
       is_published: true,
       bootstrap_class: '',
-      page: Page.find(2),
+      page: Page.find(3),
       order: 3
     },
     {
@@ -369,10 +373,10 @@ def populate_cars_table ()
 
 # # add default admin
 # create_default_admin_user()
-#
+
 # # populate province table
 # populate_province_table()
-#
+
 # # populate category table
 # populate_category_table()
 
