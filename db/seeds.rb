@@ -144,7 +144,7 @@ def populate_blocks_table ()
       show_title: true,
       is_published: true,
       bootstrap_class: '',
-      page: Page.find(3),
+      page: Page.find(2),
       order: 1
     },
     {
@@ -154,7 +154,7 @@ def populate_blocks_table ()
       show_title: true,
       is_published: true,
       bootstrap_class: '',
-      page: Page.find(3),
+      page: Page.find(2),
       order: 2
     },
     {
@@ -164,7 +164,7 @@ def populate_blocks_table ()
       show_title: true,
       is_published: true,
       bootstrap_class: '',
-      page: Page.find(3),
+      page: Page.find(2),
       order: 3
     },
     {

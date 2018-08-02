@@ -23,3 +23,6 @@
 
 # ignore .env
 /.env
+
+# ignore images
+/app/assets/images/*
