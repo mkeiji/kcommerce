@@ -23,6 +23,7 @@
 
 # ignore .env
 /.env
+/config/database.yml
 
 # ignore images
 /app/assets/images/*

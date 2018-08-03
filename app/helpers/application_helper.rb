@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  # properties
+  def get_klogo_icon ()
+    return Rails.root.to_s + '/app' + '/assets' + '/images/k_logo_small.png' 
+  end
   # Extracts the name of the image file by
   # deleting the file full path
   # @param (Car obj) car_object_from_db:
