@@ -1,45 +1,21 @@
-version: '2'
+version: '3'
 
 services:
-  mariadb:
-    image: 'bitnami/mariadb:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
 
-  myapp:
-    tty: true # Enables debugging capabilities when attached to this container.
-    image: 'bitnami/rails:latest'
-    labels:
-      kompose.service.type: nodeport
-    environment:
-      - DATABASE_URL=mysql2://mariadb/my_app_development
-    depends_on:
-      - mariadb
+  db:
+    image: 'mysql:5'
     ports:
-      - 3000:3000
+      - 3306:3306
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+
+  app:
+    tty: true 
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    depends_on:
+      - db
+    ports:
+      - 80:3000
     volumes:
-      - .:/app
-
-
-
-#version: '2'
-#
-#services:
-#  mariadb:
-#    image: 'mgkeiji/bitnamidb-keiji:latest'
-#    environment:
-#      - ALLOW_EMPTY_PASSWORD=yes
-#
-#  myapp:
-#    tty: true # Enables debugging capabilities when attached to this container.
-#    image: 'mgkeiji/bitnami-keiji:latest'
-#    labels:
-#      kompose.service.type: nodeport
-#    environment:
-#      - DATABASE_URL=mysql2://mariadb/my_app_development
-#    depends_on:
-#      - mariadb
-#    ports:
-#      - 3000:3000
-#    volumes:
-#      - .:/app
+      - .:/myapp
