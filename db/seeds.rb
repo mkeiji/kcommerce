@@ -372,22 +372,22 @@ def populate_cars_table ()
 #################################### EXEC ######################################
 
 # # add default admin
-# create_default_admin_user()
+create_default_admin_user()
 
 # # populate province table
-# populate_province_table()
+populate_province_table()
 
 # # populate category table
-# populate_category_table()
+populate_category_table()
 
 # # populate sections table
-# populate_sections_table()
+populate_sections_table()
 
 # # populate pages table
-# populate_pages_table()
+populate_pages_table()
 
 # # populate blocks table
-# populate_blocks_table()
+populate_blocks_table()
 
 # # populate cars table
-# populate_cars_table()
+populate_cars_table()
