@@ -15,12 +15,12 @@ services:
   kcommerce:
     tty: true 
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: bundle exec rails s -p 80 -b '0.0.0.0'
     links:
       - mysql:kcommerce
     depends_on:
       - mysql
     ports:
-      - 80:3000
+      - 80:80
     volumes:
       - .:/myapp
