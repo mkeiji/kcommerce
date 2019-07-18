@@ -14,3 +14,11 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
 
 COPY . /myapp
+
+RUN rake db:create \
+    && rake db:migrate \
+    && rake db:seed
+
+# Start reails server and bind it to 0.0.0.0
+# Remove this CMD if using docker-compose
+CMD ["rails", "server", "-b", "0.0.0.0"]
