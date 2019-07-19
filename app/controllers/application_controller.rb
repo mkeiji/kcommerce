@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   # @return void
   def get_page_nav
 
-    @page_nav = Page.where("display_in_menu = true").where("is_published = true").order(id: :asc)
+    @page_nav = Page.where(display_in_menu: 't').where(is_published: 't').order(id: :asc)
 
   end #end get_page_nav FUNCTION
 
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   # @return void
   def get_all_blocks
 
-    @all_blocks = Block.where("is_published = true")
+    @all_blocks = Block.where(is_published: 't')
 
   end #end get_page_nav FUNCTION
 
