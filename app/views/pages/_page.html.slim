@@ -30,21 +30,25 @@
           - all_about_us_blocks = @all_blocks.where("page_id = #{@current_page_object.id}").order(order: :asc)
           .container-fluid
             .row
-              .col-sm-8
+              .col-md-4
+              .col-md-6
+                img.mission-vision = image_tag("mission_vision_352x234.jpg")
+              .col-md-2
+            .row
+              .col-md-2
+              .col-md-8
                 br/
                 / use 'raw' because in the database the body has <p> tags
                 h5 = raw @current_page_object.body
                 br/
                 h5 = raw all_about_us_blocks[0].body
                 br/
-              .col-sm-4
-                / put image here
+              .col-md-2
+                
           .container-fluid.bg-grey
             .row
-              .col-sm-4
-                / put image here
-                span.glyphicon.glyphicon-globe.logo.slideanim
-              .col-sm-8
+              .col-md-2
+              .col-md-8
                 h2 Our Values
                 br/
                 h4
@@ -54,7 +58,8 @@
                 h4
                   strong = all_about_us_blocks[2].title + ": "
                   h5 = raw all_about_us_blocks[2].body
-
+              .col-md-2
+                
         - else
           / use 'raw' because in the database the body has <p> tags
           h2 = raw @current_page_object.body
