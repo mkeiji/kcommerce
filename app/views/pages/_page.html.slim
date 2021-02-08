@@ -9,24 +9,17 @@
 
         / for contact
         - if @current_page_object.title == 'Contact'
-          / use 'raw' because in the database the body has <p> tags
           h2 = raw @current_page_object.body
-          / get all blocks from the contact page
           - all_contact_blocks = @all_blocks.where("page_id = #{@current_page_object.id}").order(order: :asc)
-          /! Example row of columns
           .row
             - all_contact_blocks.each do |block|
               .col-md-4
                 h2 = raw block.title
                 p = raw block.body
-                / / some view details button
-                / p
-                /   a.btn.btn-secondary href="#" role="button"  View details »
           hr/
 
         / for about us
         - elsif @current_page_object.title == 'About Us'
-          / get all blocks from the contact page
           - all_about_us_blocks = @all_blocks.where("page_id = #{@current_page_object.id}").order(order: :asc)
           .container-fluid
             .row
@@ -61,19 +54,13 @@
               .col-md-2
                 
         - else
-          / use 'raw' because in the database the body has <p> tags
           h2 = raw @current_page_object.body
-          / get all blocks from the contact page
           - all_contact_blocks = @all_blocks.where("page_id = #{@current_page_object.id}").order(order: :asc)
-          /! Example row of columns
           .row
             - all_contact_blocks.each do |block|
               .col-md-4
                 h2 = raw block.title
                 p = raw block.body
-                / / some view details button
-                / p
-                /   a.btn.btn-secondary href="#" role="button"  View details »
           hr/
 
 / FOR CARS DETAILS PAGE
@@ -81,11 +68,8 @@
   .container
   .fluid_container.one
     .container
-      / getting image file name (trim the full path)
       - image_file_name = extract_car_image_filename(@current_car_object)
-      / creating row to store product details
       .row
-        / creating product image card
         .col-lg-3.col-md-6.mb-4.text-center
           .card
             img.card-img-top = image_tag(image_file_name)
@@ -94,7 +78,6 @@
             = "  "
             - if user_signed_in?
               a = link_to 'Add to cart', cart_path(:cart => true, :item => @current_car_object.id), method: :get, :class => 'btn btn-primary', :id => "test"
-        / creating product details card
         .col-lg-8.col-md-6.mb-4
           .card
             .card-body
@@ -130,31 +113,24 @@
 
           / cart body
           .panel-body
-            /container for total
             - total_value = 0
-            / loopt through items
             - session[:cart].each do |car_id, qty|
               - car_obj = Car.get_car(car_id)
               - total_value += car_obj.price * qty.to_i
-              /getting image file name (trim the full path)
               - image_file_name = extract_car_image_filename(car_obj)
               .row
-                / image
                 .col-xs-2
                   img.img-responsive = image_tag(image_file_name, :size => "100x70")
-                / name and description
                 .col-xs-4
                   h4.product-name
                     strong = "#{car_obj.make} - #{car_obj.model} #{car_obj.trim} #{car_obj.year.to_s}"
                   h4
                     small = limit_text_length(car_obj.description, 40)
-                / price
                 .col-xs-6
                   .col-xs-4.text-right
                     h6
                       strong = to_str_currency(car_obj.price)
                       = " x "
-                  / quantity
                   .col-xs-4
                     = form_tag(cart_path, :method => "get") do
                       .row
@@ -174,13 +150,6 @@
 
 / FOR CHECKOUT
 - if @load_checkout_page
-  /*** DEBUG ***
-  /= @cust_obj.inspect
-  /br
-  /= 'CART: '
-  /= session[:cart]
-  /*** DEBUG ***
-
   .container
     h1.text-center Checkout
     br
@@ -190,7 +159,6 @@
         .panel.panel-info
           .panel-heading
             .panel-title
-              / header
               .row
                 .col-xs-6
                   h5
@@ -286,28 +254,20 @@
         .panel.panel-info
           .panel-heading
             .panel-title
-              / header
               .row
                 .col-xs-6
                   h5
                     span.checkout-header = "Order Review"
-            / body
             .panel-body
-              / container for subtotal
               - checkout_subtotal = 0
               - checkout_pst = 0
               - checkout_gst = 0
               - checkout_hst = 0
               - checkout_total = 0
-              / loopt through items
               - session[:cart].each do |car_id, qty|
-                / get car obj and calculate subtotal
                 - car_obj = Car.get_car(car_id)
-                / update subtotal values
                 - checkout_subtotal += car_obj.price * qty.to_i
-                / getting image file name (trim the full path)
                 - image_file_name = extract_car_image_filename(car_obj)
-                / display cars in cart
                 .row
                   .col-sm-3.col-xs-3
                     img.img-responsive = image_tag(image_file_name, :size => "100x70")
@@ -319,7 +279,6 @@
                   .col-sm-3.col-xs-3.text-right
                     h1 = to_str_currency(car_obj.price)
 
-              / update taxes and total
               - if @cust_obj
                 - checkout_pst = checkout_subtotal * @cust_pst
                 - checkout_gst = checkout_subtotal * @cust_gst
@@ -367,14 +326,10 @@
                 .col-sm-3.col-xs-3.text-right
                   h1 = to_str_currency(checkout_total)
 
-            / show place order and pay btn only if the user already has a customer
             - if @cust_obj != false
               - amount_in_cents = checkout_total * 100
               = form_tag(pay_path(:pay => true, :user => current_user.id, :amount => amount_in_cents.to_i), :method => "post") do
                 script.stripe-button data-amount="#{amount_in_cents}" data-description=("Payment") data-key="#{Rails.configuration.stripe[:publishable_key]}" data-locale="auto" src="https://checkout.stripe.com/checkout.js"
-
-              / / simple link to btn (without stripe)
-              /= link_to 'Place Order & Pay', pay_path(:pay => true, :user => current_user.id), method: :post, :class => 'btn btn-success btn-block', :id => 'checkout_pay_btn'
 
 
 / FOR PAYMENT
